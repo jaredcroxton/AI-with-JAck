@@ -86,7 +86,7 @@ const ArticlePage: React.FC = () => {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Scale With Teddy',
+      name: 'PerformOS',
       logo: {
         '@type': 'ImageObject',
         url: '/Logo/1.png'

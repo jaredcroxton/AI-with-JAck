@@ -102,11 +102,11 @@ const Hero: React.FC = () => {
       <Starfield />
 
       {/* Logo */}
-      <div className="mb-20 relative z-10 mt-4">
+      <div className="mb-20 relative z-10 mt-4 flex justify-center w-full">
         <img
-          src="Logo/1.png"
-          alt="Logo"
-          className="h-8 md:h-10 w-auto"
+          src="/logo.svg"
+          alt="PerformOS Logo"
+          className="h-10 md:h-12 w-auto"
         />
       </div>
 
@@ -114,12 +114,12 @@ const Hero: React.FC = () => {
       <div className="text-center max-w-5xl px-6 relative z-10 transition-all duration-1000">
 
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_0.2s_forwards] leading-[1.1]">
-          <span className="text-white">Ready to Get 5 Clients from</span><br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient-x">LinkedIn in 30 Days?</span>
+          <span className="text-white">Build High-Performance</span><br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 animate-gradient-x">Organisations</span>
         </h1>
 
         <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto mb-12 opacity-0 animate-[fadeInUp_1s_ease-out_0.4s_forwards] font-light">
-          If you're making <span className="text-white font-medium">$50k/mo+ online</span> and want a hands-off LinkedIn revenue stream, we'll show you exactly how much profit you're leaving on the table.
+          PerformOS combines AI simulation, behavioural analytics, and performance intelligence to optimise how your people sell, lead, and perform.
         </p>
 
         {/* Hero Dashboard Graphic (Reduced Size) */}
@@ -154,10 +154,10 @@ const Hero: React.FC = () => {
                 {/* Profile Card */}
                 <div className="bg-white/5 rounded-2xl p-3 border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors">
                   <div className="w-10 h-10 rounded-full p-[1px] bg-gradient-to-tr from-blue-500 to-purple-500">
-                    <img src="Logo/jack profile .png" alt="Jack Roberts" className="w-full h-full rounded-full object-cover" />
+                    <img src="Logo/jack profile .png" alt="Jared Croxton" className="w-full h-full rounded-full object-cover" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white">Jack Roberts</div>
+                    <div className="text-sm font-bold text-white">Jared Croxton</div>
                     <div className="text-[10px] text-green-400">Top 1% Creator</div>
                   </div>
                 </div>
@@ -290,7 +290,13 @@ const Hero: React.FC = () => {
             onClick={() => document.getElementById('booking-section')?.scrollIntoView({ behavior: 'smooth' })}
             className="relative z-10 flex items-center gap-2 bg-white text-black px-8 py-3.5 text-base font-bold hover:bg-gray-100 transition-all rounded-xl cursor-pointer hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] group/btn"
           >
-            Scale My Business
+            Book a Demo
+          </button>
+          <button
+            onClick={() => {}}
+            className="relative ml-4 z-10 inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-8 py-3.5 text-base font-bold hover:bg-white/20 transition-all rounded-xl cursor-pointer hover:scale-[1.02] active:scale-[0.98] group/btn"
+          >
+            Explore Platform
           </button>
         </div>
       </div>

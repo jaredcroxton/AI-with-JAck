@@ -45,12 +45,12 @@ const BlogPage: React.FC = () => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Scale With Teddy Blog',
+    name: 'PerformOS Blog',
     description: 'Expert insights on LinkedIn growth, B2B lead generation, and scaling your consulting business.',
     url: typeof window !== 'undefined' ? window.location.href : '',
     publisher: {
       '@type': 'Organization',
-      name: 'Scale With Teddy',
+      name: 'PerformOS',
       logo: {
         '@type': 'ImageObject',
         url: '/Logo/1.png'

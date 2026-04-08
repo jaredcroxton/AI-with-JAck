@@ -1,0 +1,31 @@
+Colors
+Primary:
+#2814FF
+Secondary:
+#A537B4
+Accent:
+#2814FF
+Background:
+#FFFFFF
+Text Primary:
+#1A1A1A
+Link:
+#6C757D
+Fonts
+Montserrat(body)
+Roboto(body)
+Typography
+primary: Montserrat
+heading: Montserrat
+h1: 48px
+h2: 40px
+body: 13px
+Spacing
+Base Unit:
+4
+Border Radius:
+39px
+Personality
+Tone: professional
+Energy: medium
+Audience: business professionals seeking security solutions

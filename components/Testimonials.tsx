@@ -4,20 +4,20 @@ const Testimonials: React.FC = () => {
   const reviews = [
     {
       name: "Michael Chen",
-      role: "Founder, Scale Digital",
-      text: "We went from zero LinkedIn presence to 17 qualified discovery calls in the first 45 days. Closed 4 new clients worth $78k in recurring revenue. This completely changed how we think about client acquisition.",
+      role: "VP of Sales, TechCorp",
+      text: "PerformOS changed how we train our sales team. The AI roleplay coaching improved our frontline conversion rates by over 30% in just two months.",
       img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80"
     },
     {
       name: "Jennifer Martinez",
-      role: "CEO, Growth Labs Agency",
-      text: "I was skeptical because I'd tried LinkedIn before with zero results. Within 3 weeks we had our calendar filled with ideal-fit prospects. We've since brought on 6 new retainer clients and had to expand our team.",
+      role: "Head of People, Growth Labs",
+      text: "With PulseCheck 360, we finally have visibility into our workforce wellbeing. It's helped us act on small team culture issues before they became major obstacles.",
       img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80"
     },
     {
       name: "David Thompson",
-      role: "Managing Partner, Apex Consulting",
-      text: "Finally, a predictable lead source that doesn't require me to do anything. We're booking 8-12 calls per month with decision-makers who actually have budget. Best ROI we've ever seen from any marketing channel.",
+      role: "Director of Operations, Apex",
+      text: "The behavioural intelligence data we get out of PerformOS is exactly what our leadership needed to close the gap between our top performers and the rest of the team.",
       img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80"
     }
   ];
@@ -29,7 +29,7 @@ const Testimonials: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center">
-          Real Results from <span className="text-gradient-blue">Real Agencies</span>
+          Real Results from <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">High-Performing Leaders</span>
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">

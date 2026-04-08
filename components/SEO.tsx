@@ -25,7 +25,7 @@ const SEO: React.FC<SEOProps> = ({
   tags,
   structuredData
 }) => {
-  const siteName = 'Scale With Teddy';
+  const siteName = 'PerformOS';
   const fullTitle = `${title} | ${siteName}`;
 
   useEffect(() => {
