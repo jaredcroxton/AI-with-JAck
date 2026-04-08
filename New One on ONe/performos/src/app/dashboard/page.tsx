@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getLastNMondays, toISODate, formatDate } from "@/lib/dates";
 import { RATING_QUESTIONS } from "@/lib/reflection-questions";
 import Link from "next/link";
+import { TeamAISummary } from "./team-ai-summary";
 
 function MetricCard({
   label,
@@ -192,6 +193,9 @@ export default async function DashboardPage() {
           subtitle={flaggedMemberIds.size === 0 ? "No active flags" : undefined}
         />
       </div>
+
+      {/* Team AI analysis */}
+      {teamSize > 0 && <TeamAISummary managerId={user.id} />}
 
       {/* Team members list */}
       {teamSize === 0 ? (

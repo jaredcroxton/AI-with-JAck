@@ -157,29 +157,34 @@ function ReflectionForm() {
       return;
     }
 
-    const { error: insertError } = await supabase.from("reflections").insert({
-      team_member_id: user.id,
-      week_of: weekOf,
-      energy_rating: answers.energy_rating,
-      motivation_rating: answers.motivation_rating,
-      clarity_text: (answers.clarity_text as string)?.trim() || null,
-      support_rating: answers.support_rating,
-      workload_text: (answers.workload_text as string)?.trim() || null,
-      overall_rating: answers.overall_rating,
-      energy_comment: comments.energy_comment?.trim() || null,
-      motivation_comment: comments.motivation_comment?.trim() || null,
-      clarity_comment: comments.clarity_comment?.trim() || null,
-      support_comment: comments.support_comment?.trim() || null,
-      workload_comment: comments.workload_comment?.trim() || null,
-      overall_comment: comments.overall_comment?.trim() || null,
-      notes: notes.trim() || null,
+    const res = await fetch("/api/reflections/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        team_member_id: user.id,
+        week_of: weekOf,
+        energy_rating: answers.energy_rating,
+        motivation_rating: answers.motivation_rating,
+        clarity_text: (answers.clarity_text as string)?.trim() || null,
+        support_rating: answers.support_rating,
+        workload_text: (answers.workload_text as string)?.trim() || null,
+        overall_rating: answers.overall_rating,
+        energy_comment: comments.energy_comment?.trim() || null,
+        motivation_comment: comments.motivation_comment?.trim() || null,
+        clarity_comment: comments.clarity_comment?.trim() || null,
+        support_comment: comments.support_comment?.trim() || null,
+        workload_comment: comments.workload_comment?.trim() || null,
+        overall_comment: comments.overall_comment?.trim() || null,
+        notes: notes.trim() || null,
+      }),
     });
 
-    if (insertError) {
-      if (insertError.code === "23505") {
+    if (!res.ok) {
+      const data = await res.json();
+      if (res.status === 409) {
         setError("You have already submitted a reflection for this week.");
       } else {
-        setError(insertError.message);
+        setError(data.error || "Something went wrong. Please try again.");
       }
       setSubmitting(false);
       return;
