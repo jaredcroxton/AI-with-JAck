@@ -2,18 +2,16 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const roleParam = searchParams.get("role") || "team_member";
 
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [role, setRole] = useState<"manager" | "team_member">("team_member");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +27,7 @@ function LoginForm() {
         email,
         password,
         options: {
-          data: { full_name: fullName, role: roleParam },
+          data: { full_name: fullName, role },
         },
       });
       if (error) {
@@ -49,14 +47,29 @@ function LoginForm() {
       }
     }
 
-    if (roleParam === "manager") {
-      router.push("/dashboard");
+    // Always check the profile to route correctly
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.role === "executive") {
+        router.push("/executive");
+      } else if (profile?.role === "manager") {
+        router.push("/dashboard");
+      } else {
+        router.push("/my-sessions");
+      }
     } else {
       router.push("/my-sessions");
     }
   }
-
-  const roleLabel = roleParam === "manager" ? "Manager" : "Team Member";
 
   return (
     <div className="min-h-screen bg-[var(--navy)] flex items-center justify-center px-4">
@@ -64,16 +77,18 @@ function LoginForm() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-lg gradient-bg" />
-            <span className="text-xl font-semibold text-[var(--text-on-dark)] tracking-tight">
-              Perform<span className="gradient-text">OS</span>
+            <span className="text-xl font-semibold text-white tracking-tight">
+              Pulse Check<span className="gradient-text">360</span>
             </span>
           </div>
-          <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-sm text-[var(--accent-teal)] font-medium mb-4">
-            {roleLabel}
-          </div>
-          <h1 className="text-2xl font-bold text-[var(--text-on-dark)]">
+          <h1 className="text-2xl font-bold text-white">
             {isSignUp ? "Create your account" : "Welcome back"}
           </h1>
+          <p className="text-sm text-white/50 mt-1">
+            {isSignUp
+              ? "Set up your Pulse Check360 account"
+              : "Sign in to Pulse Check360"}
+          </p>
         </div>
 
         <form
@@ -81,19 +96,51 @@ function LoginForm() {
           className="bg-white rounded-2xl p-8 shadow-xl"
         >
           {isSignUp && (
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-[var(--text-on-light)] mb-1.5">
-                Full name
-              </label>
-              <input
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[var(--text-on-light)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition"
-                placeholder="Your full name"
-              />
-            </div>
+            <>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-[var(--text-on-light)] mb-1.5">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-[var(--text-on-light)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-[var(--text-on-light)] mb-1.5">
+                  I am a
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setRole("team_member")}
+                    className={`py-3 rounded-xl text-sm font-semibold transition-all ${
+                      role === "team_member"
+                        ? "gradient-bg text-white shadow-lg"
+                        : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
+                    }`}
+                  >
+                    Team Member
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setRole("manager")}
+                    className={`py-3 rounded-xl text-sm font-semibold transition-all ${
+                      role === "manager"
+                        ? "gradient-bg text-white shadow-lg"
+                        : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
+                    }`}
+                  >
+                    Manager
+                  </button>
+                </div>
+              </div>
+            </>
           )}
 
           <div className="mb-4">
@@ -163,15 +210,5 @@ function LoginForm() {
 }
 
 export default function LoginPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-[var(--navy)] flex items-center justify-center">
-          <div className="w-8 h-8 rounded-lg gradient-bg animate-pulse" />
-        </div>
-      }
-    >
-      <LoginForm />
-    </Suspense>
-  );
+  return <LoginForm />;
 }

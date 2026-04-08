@@ -128,7 +128,7 @@ Rules:
         {
           role: "system",
           content:
-            "You are a team coaching analyst for PerformOS. Return structured JSON analysis of team health. Be warm but direct. Always find bright spots alongside concerns.",
+            "You are a team coaching analyst for Pulse Check360. Return structured JSON analysis of team health. Be warm but direct. Always find bright spots alongside concerns.",
         },
         { role: "user", content: prompt },
       ],

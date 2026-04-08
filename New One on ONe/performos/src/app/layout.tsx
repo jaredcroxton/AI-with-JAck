@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PerformOS - Structured One-on-One Conversations",
+  title: "Pulse Check360 - Structured One-on-One Conversations",
   description:
-    "Run structured one-on-one performance conversations and surface early psychological safety risks across your team.",
+    "Run structured one-on-one performance conversations and surface early psychological safety risks across your team. Powered by Pulse Check360.",
 };
 
 export default function RootLayout({

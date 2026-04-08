@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: "system",
-          content: `You are a coaching assistant for managers using PerformOS, a one-on-one performance platform. Analyse the team member's weekly reflections and provide actionable coaching insights.
+          content: `You are a coaching assistant for managers using Pulse Check360, a one-on-one performance platform. Analyse the team member's weekly reflections and provide actionable coaching insights.
 
 Rules:
 - Be concise and direct

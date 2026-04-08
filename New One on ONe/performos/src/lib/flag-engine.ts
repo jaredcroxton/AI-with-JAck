@@ -1,5 +1,5 @@
 /**
- * PerformOS Flag Detection Engine
+ * Pulse Check360 Flag Detection Engine
  *
  * Eight rating-based rules (deterministic, no AI needed):
  * 1. Critical score: any rating of 1 → high_risk

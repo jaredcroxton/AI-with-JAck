@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { SignOutButton } from "./sign-out-button";
 
 export default async function ExecutiveLayout({
   children,
@@ -29,7 +30,7 @@ export default async function ExecutiveLayout({
           <Link href="/executive" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg gradient-bg" />
             <span className="text-lg font-semibold text-white tracking-tight">
-              Perform<span className="gradient-text">OS</span>
+              Pulse Check<span className="gradient-text">360</span>
             </span>
             <span className="ml-2 px-2 py-0.5 rounded-md bg-white/10 text-xs font-medium text-white/60">
               Executive
@@ -37,17 +38,7 @@ export default async function ExecutiveLayout({
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-white/60">{profile.full_name}</span>
-            <form action="/api/auth/signout" method="POST">
-              <button
-                type="button"
-                className="text-sm text-white/40 hover:text-white transition-colors"
-                onClick={async () => {
-                  "use server";
-                }}
-              >
-                Sign out
-              </button>
-            </form>
+            <SignOutButton />
           </div>
         </div>
       </nav>

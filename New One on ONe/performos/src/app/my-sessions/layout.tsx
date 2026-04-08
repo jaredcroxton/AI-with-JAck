@@ -28,7 +28,7 @@ export default async function MySessionsLayout({
           <Link href="/my-sessions" className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg gradient-bg" />
             <span className="text-lg font-semibold text-[var(--text-on-dark)] tracking-tight">
-              Perform<span className="gradient-text">OS</span>
+              Pulse Check<span className="gradient-text">360</span>
             </span>
           </Link>
           <div className="flex items-center gap-4">

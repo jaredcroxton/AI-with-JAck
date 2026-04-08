@@ -5,7 +5,7 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const TEXT_SIGNALS_PROMPT = `You are a risk detection system for PerformOS, a workplace one-on-one platform. Analyse the team member's reflection text for the following signals:
+const TEXT_SIGNALS_PROMPT = `You are a risk detection system for Pulse Check360, a workplace one-on-one platform. Analyse the team member's reflection text for the following signals:
 
 1. FLIGHT RISK: mentions of leaving, looking elsewhere, "considering my options", "not sure how long", resignation hints
 2. BURNOUT: exhaustion, overwhelm, "can't keep up", working weekends, "running on empty", sleep issues from work stress
