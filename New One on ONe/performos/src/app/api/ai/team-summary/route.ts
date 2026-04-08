@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
 
     const supabase = createAdminClient();
 
-    // Get team members
     const { data: members } = await supabase
       .from("profiles")
       .select("id, full_name")
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
       .is("deleted_at", null);
 
     if (!members || members.length === 0) {
-      return NextResponse.json({ summary: "No team members to analyse." });
+      return NextResponse.json({ analysis: null });
     }
 
     const memberIds = members.map((m) => m.id);
@@ -30,7 +29,6 @@ export async function POST(request: NextRequest) {
     const currentWeek = toISODate(mondays[0]);
     const mondayDates = mondays.map(toISODate);
 
-    // Get all reflections
     const { data: reflections } = await supabase
       .from("reflections")
       .select("*")
@@ -41,7 +39,6 @@ export async function POST(request: NextRequest) {
 
     const allReflections = reflections || [];
 
-    // Get active flags
     const { data: flags } = await supabase
       .from("risk_flags")
       .select("*, member:profiles!risk_flags_team_member_id_fkey(full_name)")
@@ -51,7 +48,6 @@ export async function POST(request: NextRequest) {
 
     const activeFlags = flags || [];
 
-    // Build summary data per member
     const memberSummaries = members.map((member) => {
       const memberReflections = allReflections.filter(
         (r) => r.team_member_id === member.id
@@ -62,8 +58,6 @@ export async function POST(request: NextRequest) {
       const memberFlags = activeFlags.filter(
         (f) => f.team_member_id === member.id
       );
-
-      const missedCurrentWeek = !currentReflection;
 
       let summary = `${member.full_name}: `;
       if (currentReflection) {
@@ -91,41 +85,59 @@ export async function POST(request: NextRequest) {
       return summary;
     });
 
-    // Members who missed
     const missedMembers = members.filter(
-      (m) => !allReflections.some(
-        (r) => r.team_member_id === m.id && r.week_of === currentWeek
-      )
+      (m) =>
+        !allReflections.some(
+          (r) => r.team_member_id === m.id && r.week_of === currentWeek
+        )
     );
 
-    const prompt = `Here is this week's reflection data for the whole team:\n\n${memberSummaries.join("\n\n")}\n\n${missedMembers.length > 0 ? `Members who did not submit this week: ${missedMembers.map((m) => m.full_name).join(", ")}.\n\n` : ""}There are ${activeFlags.length} active risk flag(s) across the team.\n\nProvide:\n1. A team health summary for this week (three to four sentences)\n2. Identify any members in the red zone (scores of 1 or 2) and explain why they need attention\n3. Patterns across the team (common themes in support requests, motivation drivers, etc.)\n4. Two to three specific actions the manager should take this week\n5. Any members who missed their reflection and why that matters`;
+    const prompt = `Here is this week's reflection data for the whole team:\n\n${memberSummaries.join("\n\n")}\n\n${missedMembers.length > 0 ? `Members who did not submit this week: ${missedMembers.map((m) => m.full_name).join(", ")}.\n\n` : ""}There are ${activeFlags.length} active risk flag(s) across the team.
+
+Return a JSON object with this exact structure:
+{
+  "pulse_score": <number 1-10 representing overall team health this week>,
+  "pulse_label": "<one to three word label like 'Needs attention' or 'Strong week' or 'Mixed signals'>",
+  "health_summary": "<two to three sentence overview of team health this week>",
+  "bright_spots": [
+    { "name": "<team member name>", "highlight": "<one sentence on what is going well for them>" }
+  ],
+  "red_zone": [
+    { "name": "<team member name>", "concern": "<one sentence on what needs attention>", "conversation_starter": "<a specific question the manager can ask them>" }
+  ],
+  "patterns": ["<pattern 1>", "<pattern 2>"],
+  "actions": ["<specific action 1>", "<specific action 2>", "<specific action 3>"],
+  "missed_reflections": ["<name of member who missed>"]
+}
+
+Rules:
+- pulse_score: 1-3 is concerning, 4-6 is mixed, 7-10 is healthy
+- bright_spots: include anyone with scores of 4 or 5 across the board, or showing improvement, or positive language in their comments. Always try to find at least one bright spot.
+- red_zone: include anyone with scores of 1 or 2, declining trends, or concerning text signals
+- patterns: common themes you see across the team
+- actions: specific things the manager should do this week
+- missed_reflections: names of anyone who did not submit
+- Never use em dashes
+- Do not use the name "Sarah"`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o",
       temperature: 0.3,
+      response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
-          content: `You are a team coaching analyst for PerformOS. You analyse the whole team's weekly reflections and give the manager a clear, actionable team health report.
-
-Rules:
-- Lead with the most important finding
-- Be specific about which team members need attention and why
-- Red zone means any score of 1 or 2
-- Flag missed reflections as a concern
-- Suggest specific conversation starters
-- Use a warm but direct professional tone
-- Never use em dashes
-- Spell out numbers one to nine, use numerals for 10+
-- Do not use the name "Sarah" in any examples`,
+          content:
+            "You are a team coaching analyst for PerformOS. Return structured JSON analysis of team health. Be warm but direct. Always find bright spots alongside concerns.",
         },
         { role: "user", content: prompt },
       ],
     });
 
-    return NextResponse.json({
-      summary: completion.choices[0].message.content,
-    });
+    const content = completion.choices[0].message.content;
+    const analysis = content ? JSON.parse(content) : null;
+
+    return NextResponse.json({ analysis });
   } catch (error) {
     console.error("Team summary error:", error);
     return NextResponse.json(

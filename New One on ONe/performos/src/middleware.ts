@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({ request });
@@ -32,10 +32,30 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Protected routes
-  if (!user && (path.startsWith("/dashboard") || path.startsWith("/my-sessions"))) {
+  if (
+    !user &&
+    (path.startsWith("/dashboard") ||
+      path.startsWith("/my-sessions") ||
+      path.startsWith("/executive"))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
+  }
+
+  // Executive route requires executive role
+  if (user && path.startsWith("/executive")) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "executive") {
+      const url = request.nextUrl.clone();
+      url.pathname = profile?.role === "manager" ? "/dashboard" : "/my-sessions";
+      return NextResponse.redirect(url);
+    }
   }
 
   // Redirect logged-in users away from login
@@ -47,7 +67,13 @@ export async function middleware(request: NextRequest) {
       .single();
 
     const url = request.nextUrl.clone();
-    url.pathname = profile?.role === "manager" ? "/dashboard" : "/my-sessions";
+    if (profile?.role === "executive") {
+      url.pathname = "/executive";
+    } else if (profile?.role === "manager") {
+      url.pathname = "/dashboard";
+    } else {
+      url.pathname = "/my-sessions";
+    }
     return NextResponse.redirect(url);
   }
 
@@ -55,5 +81,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/my-sessions/:path*", "/login"],
+  matcher: ["/dashboard/:path*", "/my-sessions/:path*", "/executive/:path*", "/login"],
 };
