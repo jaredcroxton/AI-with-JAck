@@ -187,7 +187,7 @@ export default async function ExecManagerPage(
 
       {/* Team averages heatmap */}
       {weeklyAverages.some((w) => w !== null) && (
-        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <h2 className="text-lg font-bold text-[var(--text-primary)] mb-6">
             Team averages over six weeks
           </h2>

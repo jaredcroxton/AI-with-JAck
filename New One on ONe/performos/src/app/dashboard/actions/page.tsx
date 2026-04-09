@@ -58,7 +58,7 @@ export default async function ActionsPage() {
     <div className="space-y-8">
       {/* Header with animated counters */}
       <div className="animate-fade-in">
-        <h1 className="text-2xl font-bold text-[var(--text-on-light)]">
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">
           Action items
         </h1>
         <div className="flex items-center gap-4 mt-2">
@@ -84,9 +84,9 @@ export default async function ActionsPage() {
       </div>
 
       {items.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] stagger-item" style={{ animationDelay: "0.1s" }}>
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] stagger-item" style={{ animationDelay: "0.1s" }}>
           <div className="w-16 h-16 rounded-2xl gradient-bg opacity-20 mx-auto mb-4" />
-          <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-2">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
             No action items
           </h2>
           <p className="text-[var(--text-secondary)] max-w-md mx-auto">
@@ -106,7 +106,7 @@ export default async function ActionsPage() {
                 <Link
                   key={item.id}
                   href={`/dashboard/actions/${item.id}`}
-                  className={`stagger-item flex items-start gap-4 bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] ${leftBorderClass(item)} hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-blue)]/30 transition-all duration-200`}
+                  className={`stagger-item flex items-start gap-4 bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] ${leftBorderClass(item)} hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-blue)]/30 transition-all duration-200`}
                   style={{ animationDelay: `${0.08 + index * 0.06}s` }}
                 >
                   {item.flag_id && (
@@ -114,7 +114,7 @@ export default async function ActionsPage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold text-[var(--text-on-light)]">
+                      <span className="text-sm font-semibold text-[var(--text-primary)]">
                         {item.title}
                       </span>
                     </div>
@@ -152,11 +152,11 @@ export default async function ActionsPage() {
                 <Link
                   key={item.id}
                   href={`/dashboard/actions/${item.id}`}
-                  className="stagger-item flex items-start gap-4 bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-teal)]/30 transition-all duration-200 opacity-70"
+                  className="stagger-item flex items-start gap-4 bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-teal)]/30 transition-all duration-200 opacity-70"
                   style={{ animationDelay: `${0.08 + openItems.length * 0.06 + 0.1 + index * 0.06}s` }}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-[var(--text-on-light)] mb-1">
+                    <div className="text-sm font-semibold text-[var(--text-primary)] mb-1">
                       {item.title}
                     </div>
                     <div className="text-xs text-[var(--text-secondary)]">

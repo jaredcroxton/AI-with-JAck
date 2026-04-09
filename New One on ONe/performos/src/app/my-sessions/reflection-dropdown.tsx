@@ -51,7 +51,7 @@ export function ReflectionDropdown({
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-[var(--card-shadow-xl)] border border-[var(--border)] py-2 z-50 animate-slide-up" style={{ animationDuration: "0.2s" }}>
+        <div className="absolute right-0 mt-2 w-72 bg-[var(--surface-raised)] rounded-2xl shadow-[var(--card-shadow-xl)] border border-[var(--border)] py-2 z-50 animate-slide-up" style={{ animationDuration: "0.2s" }}>
           <div className="px-4 py-2 text-[10px] font-semibold text-[var(--text-secondary)] uppercase tracking-widest">
             Select a Monday
           </div>

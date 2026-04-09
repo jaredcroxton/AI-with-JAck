@@ -140,8 +140,8 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
       {/* Manager highlights + Recommendations */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Manager highlights */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h3 className="text-sm font-bold text-[var(--text-on-light)] mb-4">Manager health status</h3>
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] mb-4">Manager health status</h3>
           <div className="space-y-3">
             {analysis.manager_highlights.map((mh, i) => {
               const style = STATUS_STYLES[mh.status] || STATUS_STYLES.amber;
@@ -150,7 +150,7 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
                   <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${style.dot}`} />
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-[var(--text-on-light)]">{mh.name}</span>
+                      <span className="text-sm font-semibold text-[var(--text-primary)]">{mh.name}</span>
                       <span className={`text-xs font-medium ${style.text}`}>{style.label}</span>
                     </div>
                     <p className="text-sm text-[var(--text-secondary)] mt-0.5">{mh.insight}</p>
@@ -163,27 +163,27 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
 
         {/* Patterns + Recommendations */}
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <h3 className="text-sm font-bold text-[var(--text-on-light)] mb-3">Organisation patterns</h3>
+          <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] mb-3">Organisation patterns</h3>
             <div className="space-y-2">
               {analysis.org_patterns.map((p, i) => (
                 <div key={i} className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
-                  <p className="text-sm text-[var(--text-on-light)]">{p}</p>
+                  <p className="text-sm text-[var(--text-primary)]">{p}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <h3 className="text-sm font-bold text-[var(--text-on-light)] mb-3">Strategic recommendations</h3>
+          <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] mb-3">Strategic recommendations</h3>
             <div className="space-y-2">
               {analysis.recommendations.map((r, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-gray-50">
+                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-[var(--surface)]">
                   <span className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center text-white text-xs font-bold shrink-0">
                     {i + 1}
                   </span>
-                  <p className="text-sm text-[var(--text-on-light)]">{r}</p>
+                  <p className="text-sm text-[var(--text-primary)]">{r}</p>
                 </div>
               ))}
             </div>

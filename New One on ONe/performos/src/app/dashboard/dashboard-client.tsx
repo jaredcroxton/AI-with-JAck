@@ -183,7 +183,7 @@ export function DashboardClient({
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Team members */}
         <div
-          className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ transitionDelay: "100ms" }}
         >
           <div className="flex items-start justify-between mb-3">
@@ -203,7 +203,7 @@ export function DashboardClient({
 
         {/* Completion rate with arc gauge */}
         <div
-          className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${completionRate === 100 ? "ring-2 ring-[var(--accent-teal)]/30" : ""} ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${completionRate === 100 ? "ring-2 ring-[var(--accent-teal)]/30" : ""} ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ transitionDelay: "200ms" }}
         >
           <div className="flex items-start justify-between mb-1">
@@ -236,7 +236,7 @@ export function DashboardClient({
 
         {/* Open actions */}
         <div
-          className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ transitionDelay: "300ms" }}
         >
           <div className="flex items-start justify-between mb-3">
@@ -256,7 +256,7 @@ export function DashboardClient({
 
         {/* Flagged members with breathing pulse when > 0 */}
         <div
-          className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border transition-all duration-300 ${
+          className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border transition-all duration-300 ${
             flaggedCount > 0
               ? "border-[var(--soft-red)]/30 shadow-[0_0_20px_rgba(239,68,68,0.08)] animate-[pulse-glow_3s_ease-in-out_infinite]"
               : "border-[var(--border)] hover:shadow-[var(--card-shadow-lg)]"
@@ -290,7 +290,7 @@ export function DashboardClient({
 
       {/* Team member cards */}
       {teamSize === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="w-16 h-16 rounded-2xl gradient-bg opacity-20 mx-auto mb-4" />
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
             No team members yet
@@ -322,7 +322,7 @@ export function DashboardClient({
                 <Link
                   key={member.id}
                   href={`/dashboard/team/${member.id}`}
-                  className={`bg-white rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 group ${
+                  className={`bg-[var(--surface-raised)] rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 group ${
                     hasConcern
                       ? "border-[var(--soft-red)]/20 hover:border-[var(--soft-red)]/40"
                       : "border-[var(--border)] hover:border-[var(--accent-blue)]/30"
@@ -390,7 +390,7 @@ export function DashboardClient({
                                   {val}
                                 </span>
                               </div>
-                              <div className="h-2 rounded-full bg-[var(--surface)] overflow-hidden">
+                              <div className="h-2 rounded-full bg-[var(--border)] overflow-hidden">
                                 <div
                                   className="h-full rounded-full"
                                   style={{

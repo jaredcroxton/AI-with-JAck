@@ -123,7 +123,7 @@ export function MemberDetailClient({
             {activeFlags.map((flag: Record<string, unknown>, fi: number) => (
               <div
                 key={flag.id as string}
-                className={`flex items-start gap-3 bg-white rounded-xl p-4 border transition-all duration-500 ${
+                className={`flex items-start gap-3 bg-[var(--surface-raised)] rounded-xl p-4 border transition-all duration-500 ${
                   mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                 }`}
                 style={{
@@ -187,7 +187,7 @@ export function MemberDetailClient({
 
       {reflections.length === 0 ? (
         <div
-          className={`bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
+          className={`bg-[var(--surface-raised)] rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "200ms" }}
@@ -204,7 +204,7 @@ export function MemberDetailClient({
         <>
           {/* Heatmap */}
           <div
-            className={`bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
+            className={`bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "300ms" }}
@@ -217,7 +217,7 @@ export function MemberDetailClient({
 
           {/* Bar charts */}
           <div
-            className={`bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
+            className={`bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "400ms" }}
@@ -242,7 +242,7 @@ export function MemberDetailClient({
               {reflections.map((r: Record<string, unknown>, ri: number) => (
                 <div
                   key={r.id as string}
-                  className={`bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-500 ${
+                  className={`bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-500 ${
                     mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   }`}
                   style={{ transitionDelay: `${550 + ri * 100}ms` }}
@@ -330,7 +330,7 @@ export function MemberDetailClient({
       {/* Open action items */}
       {openActions.length > 0 && (
         <div
-          className={`bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
+          className={`bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{ transitionDelay: `${550 + reflections.length * 100 + 100}ms` }}
@@ -351,7 +351,7 @@ export function MemberDetailClient({
                   className={`w-2.5 h-2.5 rounded-full shrink-0 ${
                     item.status === "in_progress"
                       ? "bg-[var(--accent-blue)]"
-                      : "bg-gray-300"
+                      : "bg-[var(--border)]"
                   }`}
                   style={{
                     boxShadow:

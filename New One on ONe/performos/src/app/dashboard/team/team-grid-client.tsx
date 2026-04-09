@@ -74,7 +74,7 @@ export function TeamGridClient({ memberData }: { memberData: MemberGridData[] })
   if (memberData.length === 0) {
     return (
       <div
-        className={`bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
+        className={`bg-[var(--surface-raised)] rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] transition-all duration-500 ${
           mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
       >
@@ -105,7 +105,7 @@ export function TeamGridClient({ memberData }: { memberData: MemberGridData[] })
           <Link
             key={member.id}
             href={`/dashboard/team/${member.id}`}
-            className={`bg-white rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-xl)] transition-all duration-300 group ${
+            className={`bg-[var(--surface-raised)] rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-xl)] transition-all duration-300 group ${
               hasConcern
                 ? "border-[var(--soft-red)]/20 hover:border-[var(--soft-red)]/40"
                 : "border-[var(--border)] hover:border-[var(--accent-blue)]/30"

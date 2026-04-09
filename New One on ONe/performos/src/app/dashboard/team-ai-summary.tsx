@@ -161,7 +161,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
 
       {/* Bright spots + Red zone */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -189,7 +189,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
           )}
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-[var(--soft-red)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -238,7 +238,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
 
       {/* Patterns + Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -257,7 +257,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-[var(--accent-blue)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

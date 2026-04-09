@@ -33,7 +33,7 @@ function RatingSelector({
             className={`w-[72px] h-[72px] rounded-2xl text-2xl font-bold transition-all ${
               value === n
                 ? "gradient-bg text-white shadow-lg shadow-[var(--accent-blue)]/20 scale-110"
-                : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200 hover:scale-105"
+                : "bg-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:scale-105"
             }`}
           >
             {n}
@@ -65,7 +65,7 @@ function ProgressDots({
               ? "w-10 gradient-bg"
               : i < current
                 ? "w-2.5 bg-[var(--accent-teal)]"
-                : "w-2.5 bg-gray-200"
+                : "w-2.5 bg-[var(--border)]"
           }`}
         />
       ))}
@@ -215,14 +215,14 @@ function ReflectionForm() {
 
         <ProgressDots total={totalSteps} current={step} />
 
-        <div className="bg-white rounded-3xl p-10 sm:p-12 shadow-sm border border-gray-100">
+        <div className="bg-[var(--surface-raised)] rounded-3xl p-10 sm:p-12 shadow-[var(--card-shadow)] border border-[var(--border)]">
           {currentQuestion && !isNotesStep ? (
             <div>
               <div className="text-center">
                 <div className="text-sm font-medium text-[var(--accent-teal)] mb-3">
                   Question {step + 1} of {REFLECTION_QUESTIONS.length}
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-on-light)] mb-10 leading-snug">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-10 leading-snug">
                   {currentQuestion.question}
                 </h2>
               </div>
@@ -239,13 +239,13 @@ function ReflectionForm() {
                   value={(answers[currentQuestion.key] as string) || ""}
                   onChange={(e) => handleText(e.target.value)}
                   rows={4}
-                  className="w-full px-5 py-4 rounded-2xl border border-gray-200 text-base text-[var(--text-on-light)] text-left focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
+                  className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-primary)] text-left focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
                   placeholder={currentQuestion.placeholder}
                 />
               )}
 
               {/* Comment box - required on every question */}
-              <div className="mt-8 pt-8 border-t border-gray-100">
+              <div className="mt-8 pt-8 border-t border-[var(--border)]">
                 <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
                   {currentQuestion.commentPrompt}
                   <span className="text-[var(--soft-red)]"> *</span>
@@ -254,7 +254,7 @@ function ReflectionForm() {
                   value={comments[currentQuestion.commentKey] || ""}
                   onChange={(e) => handleComment(e.target.value)}
                   rows={3}
-                  className="w-full px-5 py-4 rounded-2xl border border-gray-200 text-base text-[var(--text-on-light)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
+                  className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
                   placeholder="Write your thoughts here..."
                 />
               </div>
@@ -264,7 +264,7 @@ function ReflectionForm() {
                   <button
                     type="button"
                     onClick={() => setStep(step - 1)}
-                    className="flex-1 py-4 rounded-2xl text-base font-semibold text-[var(--text-secondary)] bg-gray-100 hover:bg-gray-200 transition"
+                    className="flex-1 py-4 rounded-2xl text-base font-semibold text-[var(--text-secondary)] bg-[var(--border)] hover:bg-[var(--surface-hover)] transition"
                   >
                     Back
                   </button>
@@ -276,7 +276,7 @@ function ReflectionForm() {
                   className={`flex-1 py-4 rounded-2xl text-base font-semibold text-white transition ${
                     canProceed
                       ? "gradient-bg hover:opacity-90"
-                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                      : "bg-[var(--border)] text-gray-400 cursor-not-allowed"
                   }`}
                 >
                   Next
@@ -288,7 +288,7 @@ function ReflectionForm() {
               <div className="text-sm font-medium text-[var(--accent-teal)] mb-3 text-center">
                 Almost done
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-on-light)] mb-3 text-center leading-snug">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-3 text-center leading-snug">
                 Anything else on your mind?
               </h2>
               <p className="text-base text-[var(--text-secondary)] mb-8 text-center">
@@ -299,7 +299,7 @@ function ReflectionForm() {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={4}
-                className="w-full px-5 py-4 rounded-2xl border border-gray-200 text-base text-[var(--text-on-light)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
+                className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
                 placeholder="What went well, what was tough, what would help next week..."
               />
 
@@ -312,7 +312,7 @@ function ReflectionForm() {
                   {RATING_QUESTIONS.map((q) => (
                     <div
                       key={q.key}
-                      className="text-center p-4 rounded-2xl bg-gray-50"
+                      className="text-center p-4 rounded-2xl bg-[var(--surface)]"
                     >
                       <div className="text-xs text-[var(--text-secondary)] mb-1">
                         {q.label}
@@ -329,12 +329,12 @@ function ReflectionForm() {
                     q.type === "text" ? (answers[q.key] as string) : null;
                   if (!comment && !textAnswer) return null;
                   return (
-                    <div key={q.key} className="p-4 rounded-2xl bg-gray-50">
+                    <div key={q.key} className="p-4 rounded-2xl bg-[var(--surface)]">
                       <div className="text-xs font-medium text-[var(--text-secondary)] mb-1">
                         {q.label}
                       </div>
                       {textAnswer && (
-                        <div className="text-sm text-[var(--text-on-light)] mb-2">
+                        <div className="text-sm text-[var(--text-primary)] mb-2">
                           {textAnswer}
                         </div>
                       )}
@@ -358,7 +358,7 @@ function ReflectionForm() {
                 <button
                   type="button"
                   onClick={() => setStep(step - 1)}
-                  className="flex-1 py-4 rounded-2xl text-base font-semibold text-[var(--text-secondary)] bg-gray-100 hover:bg-gray-200 transition"
+                  className="flex-1 py-4 rounded-2xl text-base font-semibold text-[var(--text-secondary)] bg-[var(--border)] hover:bg-[var(--surface-hover)] transition"
                 >
                   Back
                 </button>

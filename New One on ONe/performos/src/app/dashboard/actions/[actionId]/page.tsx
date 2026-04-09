@@ -85,7 +85,7 @@ export default async function ActionDetailPage(
       {/* Back */}
       <Link
         href="/dashboard/actions"
-        className="inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-on-light)] transition-colors animate-fade-in"
+        className="inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors animate-fade-in"
       >
         <svg
           className="w-4 h-4"
@@ -104,9 +104,9 @@ export default async function ActionDetailPage(
       </Link>
 
       {/* Header */}
-      <div className="stagger-item bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.05s" }}>
+      <div className="stagger-item bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.05s" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
-          <h1 className="text-xl font-bold text-[var(--text-on-light)] leading-snug">
+          <h1 className="text-xl font-bold text-[var(--text-primary)] leading-snug">
             {item.title}
           </h1>
           <span
@@ -119,13 +119,13 @@ export default async function ActionDetailPage(
 
         <div className="space-y-2 text-sm text-[var(--text-secondary)]">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-[var(--text-on-light)]">
+            <span className="font-medium text-[var(--text-primary)]">
               Team member:
             </span>
             {assignedProfile.full_name}
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-medium text-[var(--text-on-light)]">
+            <span className="font-medium text-[var(--text-primary)]">
               Created:
             </span>
             {formatDate(new Date(item.created_at))} at{" "}
@@ -136,7 +136,7 @@ export default async function ActionDetailPage(
           </div>
           {item.description && (
             <div className="pt-2">
-              <span className="font-medium text-[var(--text-on-light)]">
+              <span className="font-medium text-[var(--text-primary)]">
                 Description:
               </span>
               <p className="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">
@@ -169,7 +169,7 @@ export default async function ActionDetailPage(
                   : "bg-[var(--amber)]"
               }`}
             />
-            <span className="text-sm font-semibold text-[var(--text-on-light)] capitalize">
+            <span className="text-sm font-semibold text-[var(--text-primary)] capitalize">
               {flag.flag_type.replace(/_/g, " ")}
             </span>
             <span
@@ -196,8 +196,8 @@ export default async function ActionDetailPage(
       )}
 
       {/* Audit trail */}
-      <div className="stagger-item bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.2s" }}>
-        <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-6">
+      <div className="stagger-item bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.2s" }}>
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-6">
           Activity log
         </h2>
 
@@ -225,7 +225,7 @@ export default async function ActionDetailPage(
 
                   <div className="pb-6">
                     <div className="text-xs text-[var(--text-secondary)] mb-1">
-                      <span className="font-medium text-[var(--text-on-light)]">
+                      <span className="font-medium text-[var(--text-primary)]">
                         {author.full_name}
                       </span>
                       {" · "}
@@ -235,7 +235,7 @@ export default async function ActionDetailPage(
                         minute: "2-digit",
                       })}
                     </div>
-                    <div className="text-sm text-[var(--text-on-light)] leading-relaxed bg-[var(--surface)] rounded-xl p-4 border border-[var(--border)] hover:shadow-[var(--card-shadow)] transition-shadow duration-200">
+                    <div className="text-sm text-[var(--text-primary)] leading-relaxed bg-[var(--surface)] rounded-xl p-4 border border-[var(--border)] hover:shadow-[var(--card-shadow)] transition-shadow duration-200">
                       {note.content}
                     </div>
                   </div>

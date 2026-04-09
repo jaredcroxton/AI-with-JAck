@@ -154,8 +154,8 @@ function LoginForm() {
       </div>
 
       {/* Right: Sign in form */}
-      <div className="flex-1 flex items-center justify-center bg-white px-6">
-        <div className="w-full max-w-md animate-slide-up">
+      <div className="flex-1 flex items-center justify-center bg-[var(--surface-raised)] px-6">
+        <div className="w-full max-w-lg animate-slide-up">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
             <AccorLogo className="h-8 text-[var(--primary)]" />
@@ -168,10 +168,10 @@ function LoginForm() {
 
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[var(--text-primary)]">
+            <h1 className="text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
               {isSignUp ? "Create your account" : "Sign in"}
             </h1>
-            <p className="text-sm text-[var(--text-secondary)] mt-2">
+            <p className="text-base text-[var(--text-secondary)] mt-3">
               {isSignUp
                 ? "Set up your Pulse Check360 account"
                 : "Welcome back to Pulse Check360"}
@@ -190,7 +190,7 @@ function LoginForm() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     required
-                    className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-white text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
+                    className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
                     placeholder="Your full name"
                   />
                 </div>
@@ -206,7 +206,7 @@ function LoginForm() {
                       className={`py-3.5 rounded-xl text-sm font-semibold transition-all ${
                         role === "team_member"
                           ? "btn-primary"
-                          : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-gray-300"
+                          : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-blue)]/30"
                       }`}
                     >
                       Team Member
@@ -217,7 +217,7 @@ function LoginForm() {
                       className={`py-3.5 rounded-xl text-sm font-semibold transition-all ${
                         role === "manager"
                           ? "btn-primary"
-                          : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-gray-300"
+                          : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-blue)]/30"
                       }`}
                     >
                       Manager
@@ -236,7 +236,7 @@ function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-white text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
+                className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
                 placeholder="you@company.com"
               />
             </div>
@@ -251,7 +251,7 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-white text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
+                className="w-full px-4 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition text-sm"
                 placeholder="At least six characters"
               />
             </div>
@@ -290,8 +290,8 @@ function LoginForm() {
           </p>
 
           <div className="mt-12 pt-6 border-t border-[var(--border)] flex items-center justify-center gap-2">
-            <span className="text-xs text-[var(--text-secondary)]">Powered by</span>
-            <span className="text-xs font-bold text-[var(--text-primary)]">
+            <span className="text-sm text-[var(--text-secondary)]">Powered by</span>
+            <span className="text-sm font-bold text-[var(--text-primary)]">
               Perform<span className="gradient-text">OS</span>
             </span>
           </div>

@@ -73,7 +73,7 @@ export default async function MySessionsPage() {
             return (
               <div
                 key={q.key}
-                className="bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all"
+                className="bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all"
               >
                 <div className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-3">
                   {q.label}
@@ -104,7 +104,7 @@ export default async function MySessionsPage() {
       )}
 
       {safeReflections.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)]">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="w-16 h-16 rounded-2xl gradient-bg opacity-20 mx-auto mb-4" />
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
             No reflections yet
@@ -116,14 +116,14 @@ export default async function MySessionsPage() {
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
+          <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-6">
               Six-week heatmap
             </h2>
             <HeatMap reflections={safeReflections} mondays={mondays} />
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
+          <div className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-6">
               Trends over six weeks
             </h2>

@@ -37,14 +37,14 @@ export function AddNote() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)]"
+      className="bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)]"
     >
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={3}
         required
-        className="w-full px-4 py-3 rounded-xl border border-[var(--border)] text-sm text-[var(--text-primary)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition resize-none placeholder:text-[var(--text-secondary)]"
+        className="w-full px-4 py-3 rounded-xl border border-[var(--border)] text-sm text-[var(--text-primary)] bg-[var(--surface-raised)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition resize-none placeholder:text-[var(--text-secondary)]"
         placeholder="Write a note... observations, reminders, thoughts about your team"
       />
       <div className="flex items-center justify-between mt-3">

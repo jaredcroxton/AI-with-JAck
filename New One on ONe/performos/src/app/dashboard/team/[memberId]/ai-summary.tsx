@@ -105,7 +105,7 @@ export function AISummary({
       )}
 
       {summary && (
-        <div className="rounded-xl p-4 bg-white/60 border border-[var(--border)]">
+        <div className="rounded-xl p-4 bg-[var(--surface-raised)]/60 border border-[var(--border)]">
           <div className="text-sm text-[var(--text-primary)] leading-relaxed whitespace-pre-wrap">
             {summary}
           </div>
@@ -113,7 +113,7 @@ export function AISummary({
       )}
 
       {!summary && !loading && !error && (
-        <div className="rounded-xl p-4 bg-white/40 border border-[var(--border)]">
+        <div className="rounded-xl p-4 bg-[var(--surface-raised)]/40 border border-[var(--border)]">
           <p className="text-sm text-[var(--text-secondary)]">
             Generate AI-powered coaching insights based on {memberName}&apos;s
             reflection patterns over the last six weeks.

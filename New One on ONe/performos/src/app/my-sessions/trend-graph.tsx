@@ -91,7 +91,7 @@ export function TrendGraph({
         return (
           <div
             key={q.key}
-            className="rounded-2xl p-5 border border-[var(--border)] bg-white transition-all duration-500 hover:shadow-[var(--card-shadow-lg)]"
+            className="rounded-2xl p-5 border border-[var(--border)] bg-[var(--surface-raised)] transition-all duration-500 hover:shadow-[var(--card-shadow-lg)]"
             style={{
               opacity: mounted ? 1 : 0,
               transform: mounted ? "translateY(0)" : "translateY(12px)",

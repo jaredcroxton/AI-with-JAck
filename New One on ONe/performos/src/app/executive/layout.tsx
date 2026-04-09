@@ -26,7 +26,7 @@ export default async function ExecutiveLayout({
 
   return (
     <div className="min-h-screen bg-[var(--surface)]">
-      <nav className="bg-white border-b border-[var(--border)]">
+      <nav className="bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/executive" className="flex items-center gap-3">
             <AccorLogo className="h-7 text-[var(--primary)]" />

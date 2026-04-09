@@ -81,7 +81,7 @@ export function StatusUpdater({
           className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200 ${
             currentStatus === s.value
               ? s.activeStyle
-              : "bg-gray-50 text-[var(--text-secondary)] border-[var(--border)] hover:bg-gray-100 hover:border-gray-300"
+              : "bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border)] hover:bg-[var(--surface-hover)] hover:border-[var(--border)]"
           } disabled:cursor-default`}
         >
           {s.label}

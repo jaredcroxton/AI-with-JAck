@@ -91,7 +91,7 @@ export default function CoachingPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-on-light)]">
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">
           My coaching
         </h1>
         <p className="text-[var(--text-secondary)] mt-1">
@@ -100,13 +100,13 @@ export default function CoachingPage() {
       </div>
 
       {!coaching && !loading && (
-        <div className="bg-[var(--navy)] rounded-2xl p-10 shadow-sm text-center">
+        <div className="bg-[var(--navy)] rounded-2xl p-10 shadow-[var(--card-shadow)] text-center">
           <div className="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4">
             <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
             </svg>
           </div>
-          <h2 className="text-lg font-semibold text-[var(--text-on-dark)] mb-2">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
             Get personalised coaching
           </h2>
           <p className="text-sm text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
@@ -127,7 +127,7 @@ export default function CoachingPage() {
       )}
 
       {loading && (
-        <div className="bg-white rounded-2xl p-12 shadow-sm border border-gray-100 text-center">
+        <div className="bg-[var(--surface-raised)] rounded-2xl p-12 shadow-[var(--card-shadow)] border border-[var(--border)] text-center">
           <div className="w-10 h-10 rounded-xl gradient-bg animate-pulse mx-auto mb-4" />
           <p className="text-sm text-[var(--text-secondary)]">
             Building your coaching plan...
@@ -138,32 +138,32 @@ export default function CoachingPage() {
       {coaching && (
         <>
           {/* Weekly focus */}
-          <div className="bg-[var(--navy)] rounded-2xl p-6 shadow-sm">
+          <div className="bg-[var(--navy)] rounded-2xl p-6 shadow-[var(--card-shadow)]">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
                 <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
                 </svg>
               </div>
-              <h2 className="text-sm font-semibold text-[var(--text-on-dark)]">
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">
                 Your focus this week
               </h2>
               <button
                 onClick={generate}
                 disabled={loading}
-                className="ml-auto px-3 py-1.5 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-on-dark)] bg-white/5 hover:bg-white/10 transition"
+                className="ml-auto px-3 py-1.5 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-white/5 hover:bg-white/10 transition"
               >
                 Refresh
               </button>
             </div>
-            <p className="text-lg text-[var(--text-on-dark)] font-medium leading-relaxed">
+            <p className="text-lg text-[var(--text-primary)] font-medium leading-relaxed">
               {coaching.weekly_focus}
             </p>
           </div>
 
           {/* Activities grid */}
           <div>
-            <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
               Activities
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -174,7 +174,7 @@ export default function CoachingPage() {
                 return (
                   <div
                     key={i}
-                    className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                    className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]"
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
@@ -205,7 +205,7 @@ export default function CoachingPage() {
                         {activity.time}
                       </span>
                     </div>
-                    <h3 className="text-base font-semibold text-[var(--text-on-light)] mb-1">
+                    <h3 className="text-base font-semibold text-[var(--text-primary)] mb-1">
                       {activity.title}
                     </h3>
                     <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
@@ -220,18 +220,18 @@ export default function CoachingPage() {
           {/* Flag coaching */}
           {coaching.flag_coaching.length > 0 && (
             <div>
-              <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-4">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
                 How to handle your flags
               </h2>
               <div className="space-y-4">
                 {coaching.flag_coaching.map((fc, i) => (
                   <div
                     key={i}
-                    className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                    className="bg-[var(--surface-raised)] rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]"
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-2 h-2 rounded-full bg-[var(--amber)]" />
-                      <span className="text-sm font-semibold text-[var(--text-on-light)]">
+                      <span className="text-sm font-semibold text-[var(--text-primary)]">
                         {fc.member_name}
                       </span>
                       <span className="text-xs text-[var(--text-secondary)] capitalize">

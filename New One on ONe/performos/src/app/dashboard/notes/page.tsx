@@ -35,7 +35,7 @@ export default async function NotesPage() {
 
       {/* Notes timeline */}
       {allNotes.length === 0 ? (
-        <div className="stagger-item bg-white rounded-2xl p-10 text-center shadow-[var(--card-shadow)] border border-[var(--border)]" style={{ animationDelay: "0.12s" }}>
+        <div className="stagger-item bg-[var(--surface-raised)] rounded-2xl p-10 text-center shadow-[var(--card-shadow)] border border-[var(--border)]" style={{ animationDelay: "0.12s" }}>
           <div className="w-12 h-12 rounded-xl bg-[var(--accent-blue)]/10 flex items-center justify-center mx-auto mb-3">
             <svg className="w-6 h-6 text-[var(--accent-blue)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
@@ -63,7 +63,7 @@ export default async function NotesPage() {
                 <div className="absolute left-0 top-2 w-[23px] h-[23px] rounded-full gradient-bg shadow-[0_0_8px_rgba(79,110,247,0.3)]" />
 
                 <div className="pb-6">
-                  <div className="bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-blue)]/20 transition-all duration-200">
+                  <div className="bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-blue)]/20 transition-all duration-200">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-xs font-bold text-[var(--text-primary)]">
                         {formatDate(createdAt)}

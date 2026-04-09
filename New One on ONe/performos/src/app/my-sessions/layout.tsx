@@ -24,7 +24,7 @@ export default async function MySessionsLayout({
 
   return (
     <div className="min-h-screen bg-[var(--surface)]">
-      <nav className="bg-white border-b border-[var(--border)]">
+      <nav className="bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/my-sessions" className="flex items-center gap-2.5">
             <AccorLogo className="h-7 text-[var(--primary)]" />

@@ -44,7 +44,7 @@ export function ExecMemberCards({
         return (
           <div
             key={member.id}
-            className={`bg-white rounded-2xl shadow-[var(--card-shadow)] border transition-all duration-500 ${
+            className={`bg-[var(--surface-raised)] rounded-2xl shadow-[var(--card-shadow)] border transition-all duration-500 ${
               hasConcern
                 ? "border-[var(--soft-red)]/20"
                 : "border-[var(--border)]"

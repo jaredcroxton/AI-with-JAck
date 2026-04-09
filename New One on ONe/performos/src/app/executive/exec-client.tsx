@@ -88,7 +88,7 @@ export function ExecClient({
       {/* Metric cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Managers */}
-        <div className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "100ms" }}>
+        <div className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "100ms" }}>
           <div className="flex items-start justify-between mb-3">
             <span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Managers</span>
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
@@ -101,7 +101,7 @@ export function ExecClient({
         </div>
 
         {/* Total team members */}
-        <div className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "200ms" }}>
+        <div className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "200ms" }}>
           <div className="flex items-start justify-between mb-3">
             <span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Team members</span>
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center">
@@ -114,7 +114,7 @@ export function ExecClient({
         </div>
 
         {/* Org completion with arc gauge */}
-        <div className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${orgCompletionRate === 100 ? "ring-2 ring-[var(--accent-teal)]/30" : ""} ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "300ms" }}>
+        <div className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 ${orgCompletionRate === 100 ? "ring-2 ring-[var(--accent-teal)]/30" : ""} ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{ transitionDelay: "300ms" }}>
           <div className="flex items-start justify-between mb-1">
             <span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Completion</span>
             {orgCompletionRate === 100 && (
@@ -135,7 +135,7 @@ export function ExecClient({
         </div>
 
         {/* Flagged - breathing pulse */}
-        <div className={`bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border transition-all duration-300 ${
+        <div className={`bg-[var(--surface-raised)] rounded-2xl p-5 shadow-[var(--card-shadow)] border transition-all duration-300 ${
           totalFlags > 0
             ? "border-[var(--soft-red)]/30 animate-breathe-red"
             : "border-[var(--border)] hover:shadow-[var(--card-shadow-lg)]"
@@ -177,7 +177,7 @@ export function ExecClient({
               <Link
                 key={m.id}
                 href={`/executive/manager/${m.id}`}
-                className={`bg-white rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 group ${
+                className={`bg-[var(--surface-raised)] rounded-2xl shadow-[var(--card-shadow)] border hover:shadow-[var(--card-shadow-lg)] transition-all duration-300 group ${
                   hasConcern ? "border-[var(--soft-red)]/20 hover:border-[var(--soft-red)]/40" : "border-[var(--border)] hover:border-[var(--accent-blue)]/30"
                 }`}
                 style={{

@@ -49,7 +49,7 @@ export function AddNoteForm({ actionId }: { actionId: string }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className="block text-sm font-medium text-[var(--text-on-light)] mb-2">
+      <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
         Add a note
       </label>
       <textarea
@@ -57,7 +57,7 @@ export function AddNoteForm({ actionId }: { actionId: string }) {
         onChange={(e) => setContent(e.target.value)}
         rows={4}
         required
-        className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-on-light)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition resize-none placeholder:text-[var(--text-secondary)]"
+        className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-primary)] bg-[var(--surface-raised)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition resize-none placeholder:text-[var(--text-secondary)]"
         placeholder="Document what happened, what was discussed, and any next steps..."
       />
       <p className="text-xs text-[var(--text-secondary)] mt-2 mb-4">
