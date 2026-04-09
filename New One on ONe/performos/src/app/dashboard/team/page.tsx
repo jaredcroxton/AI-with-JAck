@@ -24,6 +24,7 @@ export default async function TeamPage() {
 
   const mondays = getLastNMondays(6);
   const mondayDates = mondays.map(toISODate);
+  const sixWeeksAgo = mondayDates[mondayDates.length - 1];
 
   let reflections: Record<string, unknown>[] = [];
   if (memberIds.length > 0) {
@@ -31,7 +32,7 @@ export default async function TeamPage() {
       .from("reflections")
       .select("*")
       .in("team_member_id", memberIds)
-      .in("week_of", mondayDates)
+      .gte("week_of", sixWeeksAgo)
       .is("deleted_at", null)
       .order("week_of", { ascending: false });
     reflections = data || [];

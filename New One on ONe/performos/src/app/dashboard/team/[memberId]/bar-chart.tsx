@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { RATING_QUESTIONS } from "@/lib/reflection-questions";
-import { toISODate } from "@/lib/dates";
 
 interface Reflection {
   week_of: string;
@@ -62,12 +61,20 @@ function TrendBadge({ values }: { values: (number | null)[] }) {
   );
 }
 
+function formatWeekLabel(dateStr: string): { day: string; month: string } {
+  const d = new Date(dateStr + "T12:00:00");
+  return {
+    day: d.getDate().toString().padStart(2, "0"),
+    month: d.toLocaleDateString("en-AU", { month: "short" }),
+  };
+}
+
 export function MemberBarChart({
   reflections,
-  mondays,
+  mondayStrings,
 }: {
   reflections: Reflection[];
-  mondays: Date[];
+  mondayStrings: string[];
 }) {
   const [mounted, setMounted] = useState(false);
 
@@ -79,13 +86,13 @@ export function MemberBarChart({
   const reflectionMap = new Map(
     reflections.map((r) => [r.week_of, r])
   );
-  const sortedMondays = [...mondays].reverse();
+  const sortedWeeks = [...mondayStrings].reverse();
 
   return (
     <div className="space-y-4">
       {RATING_QUESTIONS.map((q, qi) => {
-        const values = sortedMondays.map((monday) => {
-          const r = reflectionMap.get(toISODate(monday));
+        const values = sortedWeeks.map((week) => {
+          const r = reflectionMap.get(week);
           return r ? (r[q.key] as number) : null;
         });
 
@@ -175,15 +182,14 @@ export function MemberBarChart({
               ))}
             </div>
             <div className="flex gap-3 justify-between mt-2">
-              {sortedMondays.map((monday) => {
-                const day = monday.getDate().toString().padStart(2, "0");
-                const month = monday.toLocaleDateString("en-AU", { month: "short" });
+              {sortedWeeks.map((week) => {
+                const label = formatWeekLabel(week);
                 return (
                   <span
-                    key={toISODate(monday)}
+                    key={week}
                     className="flex-1 text-center text-[10px] text-[var(--text-secondary)] font-medium"
                   >
-                    {day} {month}
+                    {label.day} {label.month}
                   </span>
                 );
               })}

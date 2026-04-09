@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { SignOutButton } from "./sign-out-button";
+import { AccorLogo } from "../accor-logo";
 
 export default async function ExecutiveLayout({
   children,
@@ -27,12 +28,9 @@ export default async function ExecutiveLayout({
     <div className="min-h-screen bg-[var(--surface)]">
       <nav className="bg-white border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/executive" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg gradient-bg" />
-            <span className="text-lg font-bold text-[var(--primary)] tracking-tight">
-              Pulse Check<span className="gradient-text">360</span>
-            </span>
-            <span className="ml-2 px-2.5 py-0.5 rounded-md bg-[var(--accent-teal)]/10 text-xs font-semibold text-[var(--accent-teal)]">
+          <Link href="/executive" className="flex items-center gap-3">
+            <AccorLogo className="h-7 text-[var(--primary)]" />
+            <span className="px-2.5 py-0.5 rounded-md bg-[var(--accent-teal)]/10 text-xs font-semibold text-[var(--accent-teal)]">
               Executive
             </span>
           </Link>

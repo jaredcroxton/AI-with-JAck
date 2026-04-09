@@ -6,7 +6,6 @@ import { RATING_QUESTIONS, REFLECTION_QUESTIONS } from "@/lib/reflection-questio
 import { formatDate } from "@/lib/dates";
 import { MemberHeatMap } from "./heatmap";
 import { MemberBarChart } from "./bar-chart";
-import { AISummary } from "./ai-summary";
 
 const SCORE_GRADIENTS: Record<number, { from: string; to: string; glow: string }> = {
   0: { from: "#4F6EF7", to: "#818CF8", glow: "#4F6EF733" },
@@ -36,8 +35,6 @@ export function MemberDetailClient({
   openActions,
   mondayStrings,
 }: MemberDetailProps) {
-  // Reconstruct Date objects from ISO strings
-  const mondays = mondayStrings.map((s) => new Date(s + "T00:00:00"));
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -187,21 +184,6 @@ export function MemberDetailClient({
         </div>
       )}
 
-      {/* AI coaching summary */}
-      {reflections.length > 0 && (
-        <div
-          className={`transition-all duration-500 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-          style={{ transitionDelay: "250ms" }}
-        >
-          <AISummary
-            memberName={member.full_name}
-            memberId={member.id}
-            reflections={reflections}
-          />
-        </div>
-      )}
 
       {reflections.length === 0 ? (
         <div
@@ -230,7 +212,7 @@ export function MemberDetailClient({
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-6">
               Six-week heatmap
             </h2>
-            <MemberHeatMap reflections={reflections} mondays={mondays} />
+            <MemberHeatMap reflections={reflections} mondayStrings={mondayStrings} />
           </div>
 
           {/* Bar charts */}
@@ -243,7 +225,7 @@ export function MemberDetailClient({
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-6">
               Trends
             </h2>
-            <MemberBarChart reflections={reflections} mondays={mondays} />
+            <MemberBarChart reflections={reflections} mondayStrings={mondayStrings} />
           </div>
 
           {/* Weekly detail cards with stagger */}
@@ -268,7 +250,7 @@ export function MemberDetailClient({
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-sm font-bold text-[var(--text-primary)]">
                       Week of{" "}
-                      {formatDate(new Date((r.week_of as string) + "T00:00:00"))}
+                      {formatDate(new Date((r.week_of as string) + "T12:00:00"))}
                     </h3>
                     <div className="flex items-center gap-2">
                       {RATING_QUESTIONS.map((q, qi) => {

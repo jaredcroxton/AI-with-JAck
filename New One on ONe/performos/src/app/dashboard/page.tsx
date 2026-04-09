@@ -31,6 +31,7 @@ export default async function DashboardPage() {
   const currentWeek = toISODate(mondays[0]);
   const mondayDates = mondays.map(toISODate);
   const memberIds = members.map((m) => m.id);
+  const sixWeeksAgo = mondayDates[mondayDates.length - 1];
 
   let reflections: Record<string, unknown>[] = [];
   if (memberIds.length > 0) {
@@ -38,7 +39,7 @@ export default async function DashboardPage() {
       .from("reflections")
       .select("*")
       .in("team_member_id", memberIds)
-      .in("week_of", mondayDates)
+      .gte("week_of", sixWeeksAgo)
       .is("deleted_at", null)
       .order("week_of", { ascending: false });
     reflections = data || [];

@@ -38,6 +38,14 @@ export default async function ActionDetailPage(
     flag = data;
   }
 
+  // Auto-acknowledge: mark when the manager first views this action item
+  if (!item.acknowledged_at) {
+    await supabase
+      .from("action_items")
+      .update({ acknowledged_at: new Date().toISOString() })
+      .eq("id", actionId);
+  }
+
   // Get all notes (audit trail) - ordered oldest first for chronological reading
   const { data: notes } = await supabase
     .from("action_item_notes")

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { SidebarNav } from "./sidebar-nav";
+import { AccorLogo } from "../accor-logo";
 
 export default async function DashboardLayout({
   children,
@@ -37,10 +38,7 @@ export default async function DashboardLayout({
         {/* Logo */}
         <div className="px-6 py-5 border-b border-[var(--border)]">
           <Link href="/dashboard" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg gradient-bg" />
-            <span className="text-base font-bold text-[var(--primary)] tracking-tight">
-              Pulse Check<span className="gradient-text">360</span>
-            </span>
+            <AccorLogo className="h-7 text-[var(--primary)]" />
           </Link>
         </div>
 
@@ -88,9 +86,9 @@ export default async function DashboardLayout({
         <SidebarNav />
 
         {/* Powered by footer */}
-        <div className="mt-auto px-5 py-4 border-t border-[var(--border)]">
-          <p className="text-[10px] text-[var(--text-secondary)] text-center">
-            Powered by Pulse Check360
+        <div className="mt-auto px-5 py-4 border-t border-[var(--border)] text-center">
+          <p className="text-[10px] text-[var(--text-secondary)]">
+            Powered by <span className="font-bold">Perform<span className="gradient-text">OS</span></span>
           </p>
         </div>
       </aside>

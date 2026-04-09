@@ -22,12 +22,13 @@ export default async function MySessionsPage() {
 
   const mondays = getLastNMondays(6);
   const mondayDates = mondays.map(toISODate);
+  const sixWeeksAgo = mondayDates[mondayDates.length - 1];
 
   const { data: reflections } = await supabase
     .from("reflections")
     .select("*")
     .eq("team_member_id", user.id)
-    .in("week_of", mondayDates)
+    .gte("week_of", sixWeeksAgo)
     .is("deleted_at", null)
     .order("week_of", { ascending: true });
 

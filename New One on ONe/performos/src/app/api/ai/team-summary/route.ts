@@ -28,12 +28,13 @@ export async function POST(request: NextRequest) {
     const mondays = getLastNMondays(6);
     const currentWeek = toISODate(mondays[0]);
     const mondayDates = mondays.map(toISODate);
+    const sixWeeksAgo = mondayDates[mondayDates.length - 1];
 
     const { data: reflections } = await supabase
       .from("reflections")
       .select("*")
       .in("team_member_id", memberIds)
-      .in("week_of", mondayDates)
+      .gte("week_of", sixWeeksAgo)
       .is("deleted_at", null)
       .order("week_of", { ascending: false });
 

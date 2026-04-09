@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pulse Check360 - Structured One-on-One Conversations",
+  title: "ALL Accor+ | Powered by PerformOS",
   description:
-    "Run structured one-on-one performance conversations and surface early psychological safety risks across your team. Powered by Pulse Check360.",
+    "Run structured one-on-one performance conversations and surface early psychological safety risks across your team. Powered by PerformOS.",
 };
 
 export default function RootLayout({

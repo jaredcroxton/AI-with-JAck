@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { SignOutButton } from "./sign-out-button";
+import { AccorLogo } from "../accor-logo";
 
 export default async function MySessionsLayout({
   children,
@@ -26,10 +27,7 @@ export default async function MySessionsLayout({
       <nav className="bg-white border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/my-sessions" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg gradient-bg" />
-            <span className="text-lg font-bold text-[var(--primary)] tracking-tight">
-              Pulse Check<span className="gradient-text">360</span>
-            </span>
+            <AccorLogo className="h-7 text-[var(--primary)]" />
           </Link>
           <div className="flex items-center gap-5">
             <span className="text-sm font-medium text-[var(--text-secondary)]">
