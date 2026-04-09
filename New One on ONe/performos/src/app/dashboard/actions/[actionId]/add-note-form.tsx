@@ -57,7 +57,7 @@ export function AddNoteForm({ actionId }: { actionId: string }) {
         onChange={(e) => setContent(e.target.value)}
         rows={4}
         required
-        className="w-full px-5 py-4 rounded-2xl border border-gray-200 text-base text-[var(--text-on-light)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent transition resize-none"
+        className="w-full px-5 py-4 rounded-2xl border border-[var(--border)] text-base text-[var(--text-on-light)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--accent-blue)]/30 focus:border-[var(--accent-blue)] transition resize-none placeholder:text-[var(--text-secondary)]"
         placeholder="Document what happened, what was discussed, and any next steps..."
       />
       <p className="text-xs text-[var(--text-secondary)] mt-2 mb-4">
@@ -65,7 +65,7 @@ export function AddNoteForm({ actionId }: { actionId: string }) {
       </p>
 
       {error && (
-        <div className="mb-4 p-3 rounded-xl bg-red-50 text-[var(--soft-red)] text-sm">
+        <div className="mb-4 p-3 rounded-xl bg-red-50 text-[var(--soft-red)] text-sm border border-[var(--soft-red)]/10">
           {error}
         </div>
       )}
@@ -73,7 +73,7 @@ export function AddNoteForm({ actionId }: { actionId: string }) {
       <button
         type="submit"
         disabled={saving || !content.trim()}
-        className="px-6 py-3 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition disabled:opacity-50"
+        className="btn-gradient px-6 py-3 text-sm disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {saving ? "Saving..." : "Save note"}
       </button>

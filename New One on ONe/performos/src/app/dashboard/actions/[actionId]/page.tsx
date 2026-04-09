@@ -60,12 +60,24 @@ export default async function ActionDetailPage(
     return "bg-emerald-50 text-emerald-600";
   }
 
+  function statusLed(status: string) {
+    if (status === "open") return "led-red";
+    if (status === "in_progress") return "led-blue";
+    return "led-green";
+  }
+
+  function statusDotColor(status: string) {
+    if (status === "open") return "bg-[var(--soft-red)]";
+    if (status === "in_progress") return "bg-[var(--accent-blue)]";
+    return "bg-emerald-500";
+  }
+
   return (
     <div className="space-y-8 max-w-3xl">
       {/* Back */}
       <Link
         href="/dashboard/actions"
-        className="inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-on-light)] transition-colors"
+        className="inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-on-light)] transition-colors animate-fade-in"
       >
         <svg
           className="w-4 h-4"
@@ -84,14 +96,15 @@ export default async function ActionDetailPage(
       </Link>
 
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="stagger-item bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.05s" }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <h1 className="text-xl font-bold text-[var(--text-on-light)] leading-snug">
             {item.title}
           </h1>
           <span
-            className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${statusStyle(item.status)}`}
+            className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${statusStyle(item.status)}`}
           >
+            <span className={`w-1.5 h-1.5 rounded-full ${statusDotColor(item.status)} ${statusLed(item.status)}`} />
             {item.status.replace(/_/g, " ")}
           </span>
         </div>
@@ -125,25 +138,26 @@ export default async function ActionDetailPage(
           )}
         </div>
 
-        <div className="mt-4 pt-4 border-t border-gray-100">
+        <div className="mt-4 pt-4 border-t border-[var(--border)]">
           <StatusUpdater actionId={item.id} currentStatus={item.status} />
         </div>
       </div>
 
-      {/* Linked flag */}
+      {/* Linked flag - breathing pulse */}
       {flag && (
         <div
-          className={`rounded-2xl p-5 border ${
+          className={`stagger-item rounded-2xl p-5 border transition-shadow duration-200 ${
             flag.severity === "high_risk"
-              ? "bg-[var(--soft-red)]/5 border-[var(--soft-red)]/20"
-              : "bg-[var(--amber)]/5 border-[var(--amber)]/20"
+              ? "bg-[var(--soft-red)]/5 border-[var(--soft-red)]/20 animate-breathe-red"
+              : "bg-[var(--amber)]/5 border-[var(--amber)]/20 animate-breathe-amber"
           }`}
+          style={{ animationDelay: "0.12s" }}
         >
           <div className="flex items-center gap-2 mb-2">
             <div
-              className={`w-2 h-2 rounded-full ${
+              className={`w-2.5 h-2.5 rounded-full ${
                 flag.severity === "high_risk"
-                  ? "bg-[var(--soft-red)]"
+                  ? "bg-[var(--soft-red)] led-red"
                   : "bg-[var(--amber)]"
               }`}
             />
@@ -174,7 +188,7 @@ export default async function ActionDetailPage(
       )}
 
       {/* Audit trail */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <div className="stagger-item bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow duration-200" style={{ animationDelay: "0.2s" }}>
         <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-6">
           Activity log
         </h2>
@@ -189,13 +203,17 @@ export default async function ActionDetailPage(
               const author = note.author as { full_name: string };
               const createdAt = new Date(note.created_at);
               return (
-                <div key={note.id} className="relative pl-6">
+                <div
+                  key={note.id}
+                  className="stagger-item relative pl-6"
+                  style={{ animationDelay: `${0.25 + index * 0.08}s` }}
+                >
                   {/* Timeline line */}
                   {index < auditNotes.length - 1 && (
-                    <div className="absolute left-[7px] top-6 bottom-0 w-px bg-gray-200" />
+                    <div className="absolute left-[7px] top-6 bottom-0 w-px bg-[var(--border)]" />
                   )}
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-[var(--accent-teal)] bg-white" />
+                  {/* Timeline dot - gradient */}
+                  <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full gradient-bg shadow-[0_0_6px_rgba(79,110,247,0.3)]" />
 
                   <div className="pb-6">
                     <div className="text-xs text-[var(--text-secondary)] mb-1">
@@ -209,7 +227,7 @@ export default async function ActionDetailPage(
                         minute: "2-digit",
                       })}
                     </div>
-                    <div className="text-sm text-[var(--text-on-light)] leading-relaxed bg-gray-50 rounded-xl p-4">
+                    <div className="text-sm text-[var(--text-on-light)] leading-relaxed bg-[var(--surface)] rounded-xl p-4 border border-[var(--border)] hover:shadow-[var(--card-shadow)] transition-shadow duration-200">
                       {note.content}
                     </div>
                   </div>

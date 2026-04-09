@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { RATING_QUESTIONS } from "@/lib/reflection-questions";
 import { toISODate } from "@/lib/dates";
 
@@ -8,28 +9,55 @@ interface Reflection {
   [key: string]: unknown;
 }
 
-function ratingBg(value: number | null): string {
-  if (value === null) return "bg-gray-50";
-  const map: Record<number, string> = {
-    1: "bg-[var(--soft-red)]/15",
-    2: "bg-[var(--amber)]/15",
-    3: "bg-yellow-400/15",
-    4: "bg-emerald-400/15",
-    5: "bg-emerald-500/20",
+function cellStyle(value: number | null): {
+  background: string;
+  color: string;
+  boxShadow: string;
+} {
+  if (value === null) {
+    return {
+      background: "var(--surface)",
+      color: "rgba(148,163,184,0.5)",
+      boxShadow: "none",
+    };
+  }
+  const map: Record<
+    number,
+    { background: string; color: string; boxShadow: string }
+  > = {
+    1: {
+      background: "linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.18))",
+      color: "#EF4444",
+      boxShadow: "inset 0 0 12px rgba(239,68,68,0.15), 0 1px 3px rgba(239,68,68,0.08)",
+    },
+    2: {
+      background: "linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.18))",
+      color: "#D97706",
+      boxShadow: "inset 0 0 12px rgba(251,191,36,0.15), 0 1px 3px rgba(251,191,36,0.08)",
+    },
+    3: {
+      background: "linear-gradient(135deg, rgba(250,204,21,0.10), rgba(234,179,8,0.15))",
+      color: "#B45309",
+      boxShadow: "inset 0 0 8px rgba(250,204,21,0.1), 0 1px 2px rgba(234,179,8,0.06)",
+    },
+    4: {
+      background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(6,214,160,0.18))",
+      color: "#059669",
+      boxShadow: "inset 0 0 12px rgba(52,211,153,0.15), 0 1px 3px rgba(52,211,153,0.08)",
+    },
+    5: {
+      background: "linear-gradient(135deg, rgba(6,214,160,0.15), rgba(16,185,129,0.22))",
+      color: "#047857",
+      boxShadow: "inset 0 0 14px rgba(6,214,160,0.18), 0 1px 4px rgba(6,214,160,0.1)",
+    },
   };
-  return map[value] || "bg-gray-50";
-}
-
-function ratingText(value: number | null): string {
-  if (value === null) return "text-gray-300";
-  const map: Record<number, string> = {
-    1: "text-[var(--soft-red)]",
-    2: "text-amber-600",
-    3: "text-amber-600",
-    4: "text-emerald-600",
-    5: "text-emerald-700",
-  };
-  return map[value] || "text-gray-400";
+  return (
+    map[value] || {
+      background: "var(--surface)",
+      color: "rgba(148,163,184,0.5)",
+      boxShadow: "none",
+    }
+  );
 }
 
 export function MemberHeatMap({
@@ -39,9 +67,14 @@ export function MemberHeatMap({
   reflections: Reflection[];
   mondays: Date[];
 }) {
-  const reflectionMap = new Map(
-    reflections.map((r) => [r.week_of, r])
-  );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  const reflectionMap = new Map(reflections.map((r) => [r.week_of, r]));
   const sortedMondays = [...mondays].reverse();
 
   return (
@@ -49,7 +82,7 @@ export function MemberHeatMap({
       <table className="w-full">
         <thead>
           <tr>
-            <th className="text-left text-sm font-medium text-[var(--text-secondary)] pb-3 pr-4 min-w-[120px]">
+            <th className="text-left text-sm font-semibold text-[var(--text-secondary)] pb-3 pr-4 min-w-[120px]">
               Question
             </th>
             {sortedMondays.map((monday) => {
@@ -70,21 +103,32 @@ export function MemberHeatMap({
           </tr>
         </thead>
         <tbody>
-          {RATING_QUESTIONS.map((q) => (
+          {RATING_QUESTIONS.map((q, qi) => (
             <tr key={q.key}>
-              <td className="text-sm font-medium text-[var(--text-on-light)] py-2 pr-4">
+              <td className="text-sm font-semibold text-[var(--text-primary)] py-2 pr-4">
                 {q.label}
               </td>
-              {sortedMondays.map((monday) => {
+              {sortedMondays.map((monday, ci) => {
                 const dateStr = toISODate(monday);
                 const reflection = reflectionMap.get(dateStr);
                 const value = reflection
                   ? (reflection[q.key] as number)
                   : null;
+                const style = cellStyle(value);
+                const delay = qi * 80 + ci * 60;
+
                 return (
                   <td key={dateStr} className="py-2 px-2">
                     <div
-                      className={`w-full h-12 rounded-xl flex items-center justify-center text-sm font-semibold ${ratingBg(value)} ${ratingText(value)}`}
+                      className="w-full h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-500"
+                      style={{
+                        background: style.background,
+                        color: style.color,
+                        boxShadow: style.boxShadow,
+                        opacity: mounted ? 1 : 0,
+                        transform: mounted ? "scale(1)" : "scale(0.85)",
+                        transitionDelay: `${delay}ms`,
+                      }}
                     >
                       {value !== null ? value : "-"}
                     </div>

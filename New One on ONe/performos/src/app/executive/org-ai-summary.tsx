@@ -50,7 +50,7 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
   // Not yet generated
   if (!analysis && !loading && !error) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="rounded-2xl p-8 border border-[var(--border)]" style={{ background: "linear-gradient(135deg, #EEF2FF 0%, #EFF6FF 40%, #F0FDFA 100%)", boxShadow: "var(--card-shadow)" }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
@@ -59,11 +59,11 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
               </svg>
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">AI organisation analysis</h2>
-              <p className="text-sm text-white/50">Patterns and insights across all managers.</p>
+              <h2 className="text-base font-bold text-[var(--text-primary)]">AI organisation analysis</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Patterns and insights across all managers.</p>
             </div>
           </div>
-          <button onClick={generate} className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition">
+          <button onClick={generate} className="btn-gradient px-5 py-2.5 text-sm">
             Generate analysis
           </button>
         </div>
@@ -73,18 +73,18 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
 
   if (loading) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-12 shadow-sm flex flex-col items-center">
+      <div className="rounded-2xl p-12 border border-[var(--border)] flex flex-col items-center" style={{ background: "linear-gradient(135deg, #EEF2FF 0%, #EFF6FF 40%, #F0FDFA 100%)", boxShadow: "var(--card-shadow)" }}>
         <div className="w-10 h-10 rounded-xl gradient-bg animate-pulse mb-4" />
-        <p className="text-sm text-white/60">Analysing organisation...</p>
+        <p className="text-sm text-[var(--text-secondary)]">Analysing organisation...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="rounded-2xl p-8 border border-[var(--border)]" style={{ background: "linear-gradient(135deg, #EEF2FF 0%, #EFF6FF 40%, #F0FDFA 100%)", boxShadow: "var(--card-shadow)" }}>
         <p className="text-sm text-[var(--soft-red)] mb-3">{error}</p>
-        <button onClick={generate} className="px-4 py-2 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition">
+        <button onClick={generate} className="btn-gradient px-4 py-2 text-sm">
           Try again
         </button>
       </div>
@@ -101,10 +101,10 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
   return (
     <div className="space-y-4">
       {/* Pulse + summary */}
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="rounded-2xl p-8 border border-[var(--border)]" style={{ background: "linear-gradient(135deg, #EEF2FF 0%, #EFF6FF 40%, #F0FDFA 100%)", boxShadow: "var(--card-shadow)" }}>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-base font-bold text-white">AI organisation analysis</h2>
-          <button onClick={generate} disabled={loading} className="px-4 py-2 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition disabled:opacity-50">
+          <h2 className="text-base font-bold text-[var(--text-primary)]">AI organisation analysis</h2>
+          <button onClick={generate} disabled={loading} className="btn-gradient px-4 py-2 text-sm disabled:opacity-50">
             {loading ? "Refreshing..." : "Refresh analysis"}
           </button>
         </div>
@@ -114,7 +114,7 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
             <div className="relative w-40 h-40">
               <div className="absolute inset-2 rounded-full bg-gradient-to-br from-[var(--accent-blue)]/20 via-[var(--accent-teal)]/10 to-[var(--accent-green)]/20 blur-xl" />
               <svg className="relative w-40 h-40 -rotate-90" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="44" fill="none" stroke="white" strokeOpacity={0.08} strokeWidth="6" />
+                <circle cx="50" cy="50" r="44" fill="none" stroke="#CBD5E1" strokeWidth="6" />
                 <defs>
                   <linearGradient id="orgPulseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="var(--accent-blue)" />
@@ -126,14 +126,14 @@ export function OrgAISummary({ executiveId }: { executiveId: string }) {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-5xl font-extrabold gradient-text">{analysis.org_pulse}</span>
-                <span className="text-sm font-medium text-white/40">/10</span>
+                <span className="text-sm font-medium text-[var(--text-secondary)]">/10</span>
               </div>
             </div>
             <span className="mt-3 text-base font-bold gradient-text">{analysis.org_pulse_label}</span>
-            <span className="text-xs font-medium text-white/50 tracking-wide uppercase">Org pulse</span>
+            <span className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase">Org pulse</span>
           </div>
 
-          <p className="text-base text-white leading-relaxed">{analysis.executive_summary}</p>
+          <p className="text-base text-[var(--text-primary)] leading-relaxed">{analysis.executive_summary}</p>
         </div>
       </div>
 

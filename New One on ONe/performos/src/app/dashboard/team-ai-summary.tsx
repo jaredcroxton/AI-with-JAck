@@ -22,10 +22,10 @@ function PulseScore({ score, label }: { score: number; label: string }) {
     <div className="flex flex-col items-center shrink-0">
       <div className="relative w-40 h-40">
         {/* Glow effect */}
-        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-[var(--accent-blue)]/20 via-[var(--accent-teal)]/10 to-[var(--accent-green)]/20 blur-xl" />
+        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-[var(--accent-blue)]/10 via-[var(--accent-teal)]/5 to-[var(--accent-green)]/10 blur-xl" />
         <svg className="relative w-40 h-40 -rotate-90" viewBox="0 0 100 100">
           {/* Background track */}
-          <circle cx="50" cy="50" r="44" fill="none" stroke="white" strokeOpacity={0.08} strokeWidth="6" />
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#CBD5E1" strokeWidth="6" />
           {/* Gradient ring */}
           <defs>
             <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -45,11 +45,11 @@ function PulseScore({ score, label }: { score: number; label: string }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-5xl font-extrabold gradient-text">{score}</span>
-          <span className="text-sm font-medium text-white/40">/10</span>
+          <span className="text-sm font-medium text-[var(--text-secondary)]">/10</span>
         </div>
       </div>
       <span className="mt-3 text-base font-bold gradient-text">{label}</span>
-      <span className="text-xs font-medium text-white/50 tracking-wide uppercase">Team pulse</span>
+      <span className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase">Team pulse</span>
     </div>
   );
 }
@@ -84,7 +84,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
   // Initial state - not yet generated
   if (!analysis && !loading && !error) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="bg-gradient-to-r from-indigo-50 via-blue-50 to-teal-50 rounded-2xl p-8 border border-indigo-100/50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
@@ -93,17 +93,17 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
               </svg>
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">
+              <h2 className="text-base font-bold text-[var(--text-primary)]">
                 AI team analysis
               </h2>
-              <p className="text-sm text-white/50">
+              <p className="text-sm text-[var(--text-secondary)]">
                 Pulse score, bright spots, and red zones across your team.
               </p>
             </div>
           </div>
           <button
             onClick={generate}
-            className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition"
+            className="btn-primary px-5 py-2.5 text-sm"
           >
             Generate analysis
           </button>
@@ -115,9 +115,9 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
   // Loading
   if (loading) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-12 shadow-sm flex flex-col items-center justify-center">
+      <div className="bg-gradient-to-r from-indigo-50 via-blue-50 to-teal-50 rounded-2xl p-12 border border-indigo-100/50 flex flex-col items-center justify-center">
         <div className="w-10 h-10 rounded-xl gradient-bg animate-pulse mb-4" />
-        <p className="text-sm text-white/60">Analysing your team...</p>
+        <p className="text-sm text-[var(--text-secondary)]">Analysing your team...</p>
       </div>
     );
   }
@@ -125,9 +125,9 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
   // Error
   if (error) {
     return (
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="bg-gradient-to-r from-indigo-50 via-blue-50 to-teal-50 rounded-2xl p-8 border border-indigo-100/50">
         <p className="text-sm text-[var(--soft-red)] mb-3">{error}</p>
-        <button onClick={generate} className="px-4 py-2 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition">
+        <button onClick={generate} className="btn-primary px-4 py-2 text-sm">
           Try again
         </button>
       </div>
@@ -139,13 +139,13 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
   return (
     <div className="space-y-4">
       {/* Pulse score + summary */}
-      <div className="bg-[var(--navy)] rounded-2xl p-8 shadow-sm">
+      <div className="bg-gradient-to-r from-indigo-50 via-blue-50 to-teal-50 rounded-2xl p-8 border border-indigo-100/50">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-base font-bold text-white">AI team analysis</h2>
+          <h2 className="text-base font-bold text-[var(--text-primary)]">AI team analysis</h2>
           <button
             onClick={generate}
             disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition disabled:opacity-50"
+            className="btn-primary px-4 py-2 text-sm disabled:opacity-50"
           >
             {loading ? "Refreshing..." : "Refresh analysis"}
           </button>
@@ -153,7 +153,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
 
         <div className="flex items-center gap-10">
           <PulseScore score={analysis.pulse_score} label={analysis.pulse_label} />
-          <p className="text-base text-white leading-relaxed">
+          <p className="text-base text-[var(--text-primary)] leading-relaxed">
             {analysis.health_summary}
           </p>
         </div>
@@ -161,15 +161,14 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
 
       {/* Bright spots + Red zone */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Bright spots */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[var(--text-on-light)]">Bright spots</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)]">Bright spots</h3>
           </div>
           {analysis.bright_spots.length === 0 ? (
             <p className="text-sm text-[var(--text-secondary)]">No standout performers this week.</p>
@@ -181,7 +180,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
                     {spot.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-[var(--text-on-light)]">{spot.name}</div>
+                    <div className="text-sm font-semibold text-[var(--text-primary)]">{spot.name}</div>
                     <div className="text-sm text-[var(--text-secondary)]">{spot.highlight}</div>
                   </div>
                 </div>
@@ -190,15 +189,14 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
           )}
         </div>
 
-        {/* Red zone */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-[var(--soft-red)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[var(--text-on-light)]">Needs attention</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)]">Needs attention</h3>
           </div>
           {analysis.red_zone.length === 0 ? (
             <p className="text-sm text-[var(--text-secondary)]">No team members in the red zone this week.</p>
@@ -211,7 +209,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
                       {member.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-[var(--text-on-light)]">{member.name}</div>
+                      <div className="text-sm font-semibold text-[var(--text-primary)]">{member.name}</div>
                       <div className="text-sm text-[var(--text-secondary)]">{member.concern}</div>
                     </div>
                   </div>
@@ -224,7 +222,7 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
           )}
 
           {analysis.missed_reflections.length > 0 && (
-            <div className="mt-4 pt-4 border-t border-gray-100">
+            <div className="mt-4 pt-4 border-t border-[var(--border)]">
               <div className="text-xs font-medium text-[var(--amber)] uppercase tracking-wider mb-2">Missed reflections</div>
               <div className="flex flex-wrap gap-2">
                 {analysis.missed_reflections.map((name, i) => (
@@ -240,41 +238,41 @@ export function TeamAISummary({ managerId }: { managerId: string }) {
 
       {/* Patterns + Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[var(--text-on-light)]">Patterns this week</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)]">Patterns this week</h3>
           </div>
           <div className="space-y-2">
             {analysis.patterns.map((pattern, i) => (
               <div key={i} className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
-                <p className="text-sm text-[var(--text-on-light)]">{pattern}</p>
+                <p className="text-sm text-[var(--text-primary)]">{pattern}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)]">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
               <svg className="w-4 h-4 text-[var(--accent-blue)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[var(--text-on-light)]">Your actions this week</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)]">Your actions this week</h3>
           </div>
           <div className="space-y-2">
             {analysis.actions.map((action, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-gray-50">
+              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-[var(--surface)]">
                 <span className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center text-white text-xs font-bold shrink-0">
                   {i + 1}
                 </span>
-                <p className="text-sm text-[var(--text-on-light)]">{action}</p>
+                <p className="text-sm text-[var(--text-primary)]">{action}</p>
               </div>
             ))}
           </div>

@@ -13,7 +13,7 @@ export default async function MySessionsLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login?role=team_member");
+  if (!user) redirect("/login");
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -22,17 +22,17 @@ export default async function MySessionsLayout({
     .single();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-[var(--navy)] border-b border-white/5">
+    <div className="min-h-screen bg-[var(--surface)]">
+      <nav className="bg-white border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/my-sessions" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg gradient-bg" />
-            <span className="text-lg font-semibold text-[var(--text-on-dark)] tracking-tight">
+          <Link href="/my-sessions" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg gradient-bg" />
+            <span className="text-lg font-bold text-[var(--primary)] tracking-tight">
               Pulse Check<span className="gradient-text">360</span>
             </span>
           </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-[var(--text-secondary)]">
+          <div className="flex items-center gap-5">
+            <span className="text-sm font-medium text-[var(--text-secondary)]">
               {profile?.full_name}
             </span>
             <SignOutButton />

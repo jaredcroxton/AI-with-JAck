@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { SignOutButton } from "./sign-out-button";
-import { DashboardTabs } from "./dashboard-tabs";
+import { SidebarNav } from "./sidebar-nav";
 
 export default async function DashboardLayout({
   children,
@@ -14,36 +13,92 @@ export default async function DashboardLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login?role=manager");
+  if (!user) redirect("/login");
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, role")
+    .select("full_name, email, role")
     .eq("id", user.id)
     .single();
 
+  // Get team size and completion for sidebar
+  const { data: teamMembers } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("manager_id", user.id)
+    .is("deleted_at", null);
+
+  const teamSize = teamMembers?.length || 0;
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-[var(--navy)] border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg gradient-bg" />
-            <span className="text-lg font-semibold text-[var(--text-on-dark)] tracking-tight">
+    <div className="min-h-screen bg-[var(--surface)] flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r border-[var(--border)] flex flex-col shrink-0 sticky top-0 h-screen">
+        {/* Logo */}
+        <div className="px-6 py-5 border-b border-[var(--border)]">
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg gradient-bg" />
+            <span className="text-base font-bold text-[var(--primary)] tracking-tight">
               Pulse Check<span className="gradient-text">360</span>
             </span>
           </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-[var(--text-secondary)]">
-              {profile?.full_name}
-            </span>
-            <SignOutButton />
+        </div>
+
+        {/* User info */}
+        <div className="px-5 py-4 border-b border-[var(--border)]">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-sm">
+              {profile?.full_name
+                ?.split(" ")
+                .map((n: string) => n[0])
+                .join("")
+                .toUpperCase()
+                .slice(0, 2) || "M"}
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-semibold text-[var(--text-primary)] truncate">
+                {profile?.full_name}
+              </div>
+              <div className="text-xs text-[var(--text-secondary)] truncate">
+                Manager
+              </div>
+            </div>
+          </div>
+
+          {/* Team capacity bar */}
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs font-medium text-[var(--text-secondary)]">
+                Team size
+              </span>
+              <span className="text-xs font-bold text-[var(--accent-teal)]">
+                {teamSize} members
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-[var(--surface)] overflow-hidden">
+              <div
+                className="h-full rounded-full gradient-bg transition-all"
+                style={{ width: `${Math.min((teamSize / 15) * 100, 100)}%` }}
+              />
+            </div>
           </div>
         </div>
-      </nav>
-      <div className="max-w-7xl mx-auto px-6 pt-8">
-        <DashboardTabs />
-      </div>
-      <main className="max-w-7xl mx-auto px-6 py-6">{children}</main>
+
+        {/* Navigation */}
+        <SidebarNav />
+
+        {/* Powered by footer */}
+        <div className="mt-auto px-5 py-4 border-t border-[var(--border)]">
+          <p className="text-[10px] text-[var(--text-secondary)] text-center">
+            Powered by Pulse Check360
+          </p>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 min-w-0">
+        <div className="max-w-6xl mx-auto px-8 py-8">{children}</div>
+      </main>
     </div>
   );
 }

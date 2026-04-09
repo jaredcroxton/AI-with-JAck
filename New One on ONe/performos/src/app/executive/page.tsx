@@ -120,7 +120,7 @@ export default async function ExecutivePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-on-light)]">
+        <h1 className="text-2xl font-bold text-[var(--text-primary)]">
           Organisation overview
         </h1>
         <p className="text-[var(--text-secondary)] mt-1">
@@ -130,15 +130,15 @@ export default async function ExecutivePage() {
 
       {/* Org-wide metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
           <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">Managers</div>
-          <div className="text-3xl font-bold text-[var(--text-on-light)]">{allManagers.length}</div>
+          <div className="text-3xl font-bold text-[var(--text-primary)]">{allManagers.length}</div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
           <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">Total team members</div>
-          <div className="text-3xl font-bold text-[var(--text-on-light)]">{totalTeamMembers}</div>
+          <div className="text-3xl font-bold text-[var(--text-primary)]">{totalTeamMembers}</div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
           <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">Org completion rate</div>
           <div className={`text-3xl font-bold ${completionColor(orgCompletionRate)}`}>
             {orgCompletionRate}%
@@ -147,7 +147,7 @@ export default async function ExecutivePage() {
             {totalSubmissions} of {totalTeamMembers} this week
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow">
           <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">Active risk flags</div>
           <div className={`text-3xl font-bold ${totalFlags > 0 ? "text-[var(--soft-red)]" : "text-emerald-600"}`}>
             {totalFlags}
@@ -162,9 +162,9 @@ export default async function ExecutivePage() {
       <OrgAISummary executiveId={user.id} />
 
       {/* Manager breakdown */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] transition-shadow overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100">
-          <h2 className="text-lg font-bold text-[var(--text-on-light)]">
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">
             Team health by manager
           </h2>
           <p className="text-sm text-[var(--text-secondary)] mt-0.5">
@@ -173,7 +173,7 @@ export default async function ExecutivePage() {
         </div>
 
         {/* Table header */}
-        <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-3 bg-gray-50/50 border-b border-gray-100 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
+        <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-3 bg-[var(--surface)] border-b border-[var(--border)] text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
           <div className="col-span-3">Manager</div>
           <div className="col-span-1 text-center">Team</div>
           <div className="col-span-1 text-center">Done</div>
@@ -186,7 +186,7 @@ export default async function ExecutivePage() {
         </div>
 
         {/* Manager rows */}
-        <div className="divide-y divide-gray-50">
+        <div className="divide-y divide-[var(--border-light)]">
           {managerData.map((m) => {
             const avgAll =
               m.teamSize > 0
@@ -209,7 +209,7 @@ export default async function ExecutivePage() {
                       .slice(0, 2)}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-[var(--text-on-light)]">
+                    <div className="text-sm font-semibold text-[var(--text-primary)]">
                       {m.full_name}
                     </div>
                     <div className="text-xs text-[var(--text-secondary)] md:hidden">
@@ -220,7 +220,7 @@ export default async function ExecutivePage() {
 
                 {/* Team size */}
                 <div className="hidden md:flex col-span-1 justify-center">
-                  <span className="text-sm font-semibold text-[var(--text-on-light)]">
+                  <span className="text-sm font-semibold text-[var(--text-primary)]">
                     {m.teamSize}
                   </span>
                 </div>

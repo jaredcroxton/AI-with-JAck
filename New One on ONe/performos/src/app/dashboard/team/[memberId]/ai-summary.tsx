@@ -38,12 +38,24 @@ export function AISummary({
   }
 
   return (
-    <div className="bg-[var(--navy)] rounded-2xl p-6 shadow-sm">
+    <div
+      className="rounded-2xl p-6 border border-[var(--border)]"
+      style={{
+        background: "linear-gradient(135deg, #EEF2FF 0%, #EFF6FF 40%, #F0FDFA 100%)",
+        boxShadow: "var(--card-shadow)",
+      }}
+    >
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center"
+            style={{
+              background: "linear-gradient(135deg, #4F6EF7 0%, #06D6A0 60%, #34D399 100%)",
+              boxShadow: "0 2px 10px rgba(79, 110, 247, 0.25)",
+            }}
+          >
             <svg
-              className="w-4 h-4 text-white"
+              className="w-4.5 h-4.5 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -56,38 +68,57 @@ export function AISummary({
               />
             </svg>
           </div>
-          <h2 className="text-sm font-semibold text-[var(--text-on-dark)]">
-            AI coaching insights
-          </h2>
+          <div>
+            <h2 className="text-sm font-bold text-[var(--text-primary)]">
+              AI coaching insights
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)]">
+              Powered by reflection analysis
+            </p>
+          </div>
         </div>
         {!summary && (
           <button
             onClick={generateSummary}
             disabled={loading}
-            className="px-4 py-2 rounded-xl text-sm font-semibold text-white gradient-bg hover:opacity-90 transition disabled:opacity-50"
+            className="btn-gradient px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition disabled:opacity-50"
           >
-            {loading ? "Analysing..." : "Generate insights"}
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Analysing...
+              </span>
+            ) : (
+              "Generate insights"
+            )}
           </button>
         )}
       </div>
 
       {error && (
-        <p className="text-sm text-[var(--soft-red)]">{error}</p>
+        <div className="rounded-xl p-3 bg-red-50 border border-red-100">
+          <p className="text-sm text-[var(--soft-red)]">{error}</p>
+        </div>
       )}
 
       {summary && (
-        <div className="prose prose-sm prose-invert max-w-none">
-          <div className="text-sm text-[var(--text-on-dark)]/90 leading-relaxed whitespace-pre-wrap">
+        <div className="rounded-xl p-4 bg-white/60 border border-[var(--border)]">
+          <div className="text-sm text-[var(--text-primary)] leading-relaxed whitespace-pre-wrap">
             {summary}
           </div>
         </div>
       )}
 
       {!summary && !loading && !error && (
-        <p className="text-sm text-[var(--text-secondary)]">
-          Generate AI-powered coaching insights based on {memberName}'s
-          reflection patterns over the last six weeks.
-        </p>
+        <div className="rounded-xl p-4 bg-white/40 border border-[var(--border)]">
+          <p className="text-sm text-[var(--text-secondary)]">
+            Generate AI-powered coaching insights based on {memberName}&apos;s
+            reflection patterns over the last six weeks.
+          </p>
+        </div>
       )}
     </div>
   );

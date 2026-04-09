@@ -23,34 +23,68 @@ export default async function ActionsPage() {
   const openItems = items.filter((i) => i.status !== "completed");
   const resolvedItems = items.filter((i) => i.status === "completed");
 
-  function statusStyle(status: string) {
-    if (status === "open")
-      return "bg-[var(--soft-red)]/10 text-[var(--soft-red)]";
-    if (status === "in_progress")
-      return "bg-[var(--accent-blue)]/10 text-[var(--accent-blue)]";
-    return "bg-emerald-50 text-emerald-600";
+  function statusPill(status: string) {
+    if (status === "open") {
+      return (
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[var(--soft-red)]/10 text-[var(--soft-red)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--soft-red)] led-red" />
+          open
+        </span>
+      );
+    }
+    if (status === "in_progress") {
+      return (
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[var(--accent-blue)]/10 text-[var(--accent-blue)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue)] led-blue" />
+          in progress
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 led-green" />
+        completed
+      </span>
+    );
   }
 
-  function severityDot(item: Record<string, unknown>) {
-    if (!item.flag_id) return null;
-    return (
-      <div className="w-2 h-2 rounded-full bg-[var(--amber)] shrink-0 mt-1.5" />
-    );
+  function leftBorderClass(item: Record<string, unknown>) {
+    if (item.flag_id) return "border-l-[3px] border-l-[var(--soft-red)]";
+    if (item.status === "in_progress") return "border-l-[3px] border-l-[var(--accent-blue)]";
+    return "";
   }
 
   return (
     <div className="space-y-8">
-      <div>
+      {/* Header with animated counters */}
+      <div className="animate-fade-in">
         <h1 className="text-2xl font-bold text-[var(--text-on-light)]">
           Action items
         </h1>
-        <p className="text-[var(--text-secondary)] mt-1">
-          {openItems.length} open, {resolvedItems.length} resolved
-        </p>
+        <div className="flex items-center gap-4 mt-2">
+          <span className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+            <span
+              className="animate-counter-pop inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--soft-red)]/10 text-[var(--soft-red)] text-xs font-bold"
+              style={{ animationDelay: "0.1s" }}
+            >
+              {openItems.length}
+            </span>
+            open
+          </span>
+          <span className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+            <span
+              className="animate-counter-pop inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 text-xs font-bold"
+              style={{ animationDelay: "0.25s" }}
+            >
+              {resolvedItems.length}
+            </span>
+            resolved
+          </span>
+        </div>
       </div>
 
       {items.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-12 text-center shadow-[var(--card-shadow)] border border-[var(--border)] stagger-item" style={{ animationDelay: "0.1s" }}>
           <div className="w-16 h-16 rounded-2xl gradient-bg opacity-20 mx-auto mb-4" />
           <h2 className="text-lg font-semibold text-[var(--text-on-light)] mb-2">
             No action items
@@ -65,16 +99,19 @@ export default async function ActionsPage() {
           {/* Open items */}
           {openItems.length > 0 && (
             <div className="space-y-3">
-              <h2 className="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider">
+              <h2 className="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider stagger-item" style={{ animationDelay: "0.05s" }}>
                 Open
               </h2>
-              {openItems.map((item) => (
+              {openItems.map((item, index) => (
                 <Link
                   key={item.id}
                   href={`/dashboard/actions/${item.id}`}
-                  className="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                  className={`stagger-item flex items-start gap-4 bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] ${leftBorderClass(item)} hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-blue)]/30 transition-all duration-200`}
+                  style={{ animationDelay: `${0.08 + index * 0.06}s` }}
                 >
-                  {severityDot(item)}
+                  {item.flag_id && (
+                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--amber)] shrink-0 mt-1.5 led-red" />
+                  )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-sm font-semibold text-[var(--text-on-light)]">
@@ -86,13 +123,9 @@ export default async function ActionsPage() {
                       {formatDate(new Date(item.created_at))}
                     </div>
                   </div>
-                  <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${statusStyle(item.status)}`}
-                  >
-                    {item.status.replace(/_/g, " ")}
-                  </span>
+                  {statusPill(item.status)}
                   <svg
-                    className="w-5 h-5 text-gray-300 shrink-0"
+                    className="w-5 h-5 text-gray-300 shrink-0 transition-transform group-hover:translate-x-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -112,14 +145,15 @@ export default async function ActionsPage() {
           {/* Resolved items */}
           {resolvedItems.length > 0 && (
             <div className="space-y-3">
-              <h2 className="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider">
+              <h2 className="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider stagger-item" style={{ animationDelay: `${0.08 + openItems.length * 0.06 + 0.05}s` }}>
                 Resolved
               </h2>
-              {resolvedItems.map((item) => (
+              {resolvedItems.map((item, index) => (
                 <Link
                   key={item.id}
                   href={`/dashboard/actions/${item.id}`}
-                  className="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow opacity-70"
+                  className="stagger-item flex items-start gap-4 bg-white rounded-2xl p-5 shadow-[var(--card-shadow)] border border-[var(--border)] hover:shadow-[var(--card-shadow-lg)] hover:border-[var(--accent-teal)]/30 transition-all duration-200 opacity-70"
+                  style={{ animationDelay: `${0.08 + openItems.length * 0.06 + 0.1 + index * 0.06}s` }}
                 >
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-semibold text-[var(--text-on-light)] mb-1">
@@ -130,11 +164,7 @@ export default async function ActionsPage() {
                       {formatDate(new Date(item.created_at))}
                     </div>
                   </div>
-                  <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full shrink-0 ${statusStyle(item.status)}`}
-                  >
-                    completed
-                  </span>
+                  {statusPill(item.status)}
                   <svg
                     className="w-5 h-5 text-gray-300 shrink-0"
                     fill="none"

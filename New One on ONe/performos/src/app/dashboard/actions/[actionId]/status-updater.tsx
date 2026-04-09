@@ -51,9 +51,21 @@ export function StatusUpdater({
   }
 
   const statuses = [
-    { value: "open", label: "Open", style: "bg-[var(--soft-red)]/10 text-[var(--soft-red)] border-[var(--soft-red)]/20" },
-    { value: "in_progress", label: "In progress", style: "bg-[var(--accent-blue)]/10 text-[var(--accent-blue)] border-[var(--accent-blue)]/20" },
-    { value: "completed", label: "Resolved", style: "bg-emerald-50 text-emerald-600 border-emerald-200" },
+    {
+      value: "open",
+      label: "Open",
+      activeStyle: "bg-[var(--soft-red)]/15 text-[var(--soft-red)] border-[var(--soft-red)]/30 shadow-[0_0_8px_rgba(239,68,68,0.15)]",
+    },
+    {
+      value: "in_progress",
+      label: "In progress",
+      activeStyle: "bg-[var(--accent-blue)]/15 text-[var(--accent-blue)] border-[var(--accent-blue)]/30 shadow-[0_0_8px_rgba(79,110,247,0.15)]",
+    },
+    {
+      value: "completed",
+      label: "Resolved",
+      activeStyle: "gradient-bg text-white border-transparent shadow-[0_2px_12px_rgba(79,110,247,0.25),0_1px_4px_rgba(6,214,160,0.15)]",
+    },
   ];
 
   return (
@@ -66,11 +78,11 @@ export function StatusUpdater({
           key={s.value}
           onClick={() => updateStatus(s.value)}
           disabled={updating || currentStatus === s.value}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200 ${
             currentStatus === s.value
-              ? `${s.style} border-current`
-              : "bg-gray-50 text-[var(--text-secondary)] border-gray-200 hover:bg-gray-100"
-          } disabled:opacity-50`}
+              ? s.activeStyle
+              : "bg-gray-50 text-[var(--text-secondary)] border-[var(--border)] hover:bg-gray-100 hover:border-gray-300"
+          } disabled:cursor-default`}
         >
           {s.label}
         </button>
