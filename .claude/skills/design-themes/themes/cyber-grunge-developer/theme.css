@@ -1,0 +1,276 @@
+/* =====================================================================
+   Cyber-Grunge Developer — Design System
+   Built from a written design brief + reference image (the "burnt-out dev
+   at a messy neon desk" scene).
+   Style: moody high-stress dark terminal room meets hyper-clean glowing
+   holographic glassmorphism UI. Deep near-black canvas, faint tech grid,
+   neon-blue primary, error-red alerts/CTAs, sticky-note yellow accents.
+   ===================================================================== */
+
+:root {
+  /* ---- Color specifications (from brief) ---- */
+  --cgd-bg:        #0B0E14;  /* deep background — 90% of layout       */
+  --cgd-panel:     #161B25;  /* card / panel / code container         */
+  --cgd-blue:      #00D2FF;  /* primary accent — neon tech blue       */
+  --cgd-red:       #FF3B6B;  /* secondary accent — error / warning    */
+  --cgd-yellow:    #E5C158;  /* tertiary accent — sticky-note yellow  */
+  --cgd-text:      #FFFFFF;  /* high-contrast titles                  */
+  --cgd-body:      #A0AAB8;  /* slate-gray body copy                  */
+  --cgd-green:     #2EE6A8;  /* "System Status: Nominal" indicator    */
+
+  /* ---- Glassmorphic surface tokens ---- */
+  --cgd-glass:        rgba(22, 27, 37, 0.7);
+  --cgd-glass-blur:   blur(8px);
+  --cgd-border-blue:  rgba(0, 210, 255, 0.55);
+  --cgd-border-red:   rgba(255, 59, 107, 0.55);
+  --cgd-hairline:     rgba(160, 170, 184, 0.14);
+
+  --cgd-glow-blue:  0 0 15px rgba(0, 210, 255, 0.20);
+  --cgd-glow-blue-strong: 0 0 24px rgba(0, 210, 255, 0.45);
+  --cgd-glow-red:   0 0 18px rgba(255, 59, 107, 0.35);
+
+  /* ---- Radius / shape ---- */
+  --cgd-radius:     14px;
+  --cgd-radius-sm:  8px;
+
+  /* ---- Typography ---- */
+  --cgd-font-ui:   "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --cgd-font-mono: "JetBrains Mono", "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+  --cgd-font-hand: "Architects Daughter", "Permanent Marker", "Comic Sans MS", cursive;
+
+  --cgd-fs-display: clamp(2.5rem, 5vw, 4rem);
+  --cgd-fs-h2:      clamp(1.5rem, 3vw, 2.25rem);
+  --cgd-fs-h3:      1.15rem;
+  --cgd-fs-body:    1rem;
+  --cgd-fs-mono:    0.82rem;
+  --cgd-fs-eyebrow: 0.72rem;
+
+  /* ---- Spacing (4px base) ---- */
+  --cgd-space-1: 4px;
+  --cgd-space-2: 8px;
+  --cgd-space-3: 12px;
+  --cgd-space-4: 16px;
+  --cgd-space-6: 24px;
+  --cgd-space-8: 32px;
+  --cgd-space-12: 48px;
+
+  /* ---- Faint isometric tech-grid backdrop ---- */
+  --cgd-grid:
+    linear-gradient(rgba(0,210,255,.035) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(90deg, rgba(0,210,255,.035) 1px, transparent 1px) 0 0 / 32px 100%;
+}
+
+/* Fonts (add to <head>):
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Architects+Daughter&display=swap" rel="stylesheet"> */
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+.cgd {
+  background-color: var(--cgd-bg);
+  background-image: var(--cgd-grid);
+  color: var(--cgd-body);
+  font-family: var(--cgd-font-ui);
+  font-size: var(--cgd-fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cgd h1, .cgd h2, .cgd h3 {
+  color: var(--cgd-text);
+  font-family: var(--cgd-font-ui);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 var(--cgd-space-3);
+}
+
+.cgd-display { font-size: var(--cgd-fs-display); font-weight: 800; }
+.cgd-blue   { color: var(--cgd-blue); }
+.cgd-red    { color: var(--cgd-red); }
+.cgd-yellow { color: var(--cgd-yellow); }
+
+.cgd-mono { font-family: var(--cgd-font-mono); font-size: var(--cgd-fs-mono); }
+.cgd-eyebrow {
+  font-family: var(--cgd-font-mono);
+  font-size: var(--cgd-fs-eyebrow);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cgd-blue);
+}
+/* Hand-drawn sticky-note callout */
+.cgd-scribble { font-family: var(--cgd-font-hand); color: var(--cgd-yellow); font-size: 1.1rem; }
+
+/* =====================================================================
+   Holographic glass cards
+   ===================================================================== */
+.cgd-card {
+  background: var(--cgd-glass);
+  -webkit-backdrop-filter: var(--cgd-glass-blur);
+  backdrop-filter: var(--cgd-glass-blur);
+  border: 1px solid var(--cgd-border-blue);
+  border-radius: var(--cgd-radius);
+  box-shadow: var(--cgd-glow-blue);
+  padding: var(--cgd-space-6);
+}
+.cgd-card--red   { border-color: var(--cgd-border-red); box-shadow: var(--cgd-glow-red); }
+.cgd-card--plain { border-color: var(--cgd-hairline); box-shadow: none; }
+
+/* Optional "breathing" glow animation for hero/featured cards */
+@keyframes cgd-breathe {
+  0%, 100% { box-shadow: 0 0 12px rgba(0,210,255,.15); }
+  50%      { box-shadow: 0 0 26px rgba(0,210,255,.40); }
+}
+.cgd-card--breathe { animation: cgd-breathe 3.2s ease-in-out infinite; }
+
+/* =====================================================================
+   Buttons
+   ===================================================================== */
+.cgd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgd-space-2);
+  font-family: var(--cgd-font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: var(--cgd-space-3) var(--cgd-space-6);
+  border-radius: var(--cgd-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.cgd-btn:active { transform: translateY(1px); }
+
+/* Primary CTA — error red with pulsing neon glow (per brief) */
+@keyframes cgd-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,59,107,.45), 0 0 14px rgba(255,59,107,.35); }
+  50%      { box-shadow: 0 0 0 6px rgba(255,59,107,0), 0 0 22px rgba(255,59,107,.55); }
+}
+.cgd-btn--primary {
+  background: var(--cgd-red);
+  color: #fff;
+  animation: cgd-pulse 2.2s ease-in-out infinite;
+}
+.cgd-btn--primary:hover { filter: brightness(1.08); }
+
+/* Secondary — neon blue outline on glass */
+.cgd-btn--ghost {
+  background: rgba(0,210,255,.06);
+  color: var(--cgd-blue);
+  border-color: var(--cgd-border-blue);
+  box-shadow: var(--cgd-glow-blue);
+}
+.cgd-btn--ghost:hover { box-shadow: var(--cgd-glow-blue-strong); }
+
+/* =====================================================================
+   Status / indicators
+   ===================================================================== */
+.cgd-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cgd-space-2);
+  font-family: var(--cgd-font-mono);
+  font-size: var(--cgd-fs-eyebrow);
+  letter-spacing: 0.08em;
+  color: var(--cgd-body);
+}
+.cgd-status__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cgd-green);
+  box-shadow: 0 0 8px var(--cgd-green);
+  animation: cgd-blink 2s ease-in-out infinite;
+}
+@keyframes cgd-blink { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+.cgd-badge {
+  display: inline-block;
+  font-family: var(--cgd-font-mono);
+  font-size: var(--cgd-fs-eyebrow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px var(--cgd-space-2);
+  border-radius: 4px;
+  border: 1px solid var(--cgd-border-blue);
+  color: var(--cgd-blue);
+  background: rgba(0,210,255,.06);
+}
+.cgd-badge--red    { color: var(--cgd-red); border-color: var(--cgd-border-red); background: rgba(255,59,107,.07); }
+.cgd-badge--yellow { color: var(--cgd-yellow); border-color: rgba(229,193,88,.4); background: rgba(229,193,88,.07); }
+
+/* =====================================================================
+   Metric widget (the floating "DAILY ACTIVE USERS" panel)
+   ===================================================================== */
+.cgd-metric__label {
+  font-family: var(--cgd-font-mono);
+  font-size: var(--cgd-fs-eyebrow);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cgd-body);
+}
+.cgd-metric__value {
+  font-family: var(--cgd-font-mono);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  color: var(--cgd-text);
+}
+.cgd-metric__delta { font-family: var(--cgd-font-mono); font-size: var(--cgd-fs-mono); color: var(--cgd-blue); }
+.cgd-metric__delta--down { color: var(--cgd-red); }
+
+/* Alert row (the "ERROR — Server Down" panel) */
+.cgd-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--cgd-space-3);
+  border: 1px solid var(--cgd-border-red);
+  border-radius: var(--cgd-radius-sm);
+  background: rgba(255,59,107,.08);
+  box-shadow: var(--cgd-glow-red);
+  padding: var(--cgd-space-3) var(--cgd-space-4);
+  color: var(--cgd-text);
+  font-family: var(--cgd-font-mono);
+  font-size: var(--cgd-fs-mono);
+}
+
+/* Feature-request list row */
+.cgd-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--cgd-space-2);
+  padding: var(--cgd-space-2) 0;
+  border-bottom: 1px solid var(--cgd-hairline);
+  color: var(--cgd-body);
+  font-size: 0.92rem;
+}
+.cgd-feature__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cgd-blue); box-shadow: 0 0 6px var(--cgd-blue); flex: none; }
+
+/* Sticky note (hand-drawn callout) */
+.cgd-sticky {
+  display: inline-block;
+  background: var(--cgd-yellow);
+  color: #1a1405;
+  font-family: var(--cgd-font-hand);
+  font-size: 1.05rem;
+  padding: var(--cgd-space-3) var(--cgd-space-4);
+  transform: rotate(-2.5deg);
+  box-shadow: 0 8px 18px rgba(0,0,0,.45);
+}
+
+/* =====================================================================
+   Header / nav
+   ===================================================================== */
+.cgd-header {
+  display: flex;
+  align-items: center;
+  gap: var(--cgd-space-6);
+  padding: var(--cgd-space-4) var(--cgd-space-6);
+  background: var(--cgd-bg);
+  border-bottom: 1px solid var(--cgd-hairline);
+}
+.cgd-brand { display: flex; align-items: center; gap: var(--cgd-space-2); color: var(--cgd-text); font-weight: 800; letter-spacing: -.02em; }
+.cgd-brand__mark { width: 18px; height: 18px; border-radius: 5px; background: var(--cgd-blue); box-shadow: var(--cgd-glow-blue-strong); }
+.cgd-header__spacer { flex: 1; }
+.cgd-nav { display: flex; gap: var(--cgd-space-6); }
+.cgd-nav a { color: var(--cgd-body); text-decoration: none; font-size: 0.9rem; }
+.cgd-nav a:hover { color: var(--cgd-blue); }
