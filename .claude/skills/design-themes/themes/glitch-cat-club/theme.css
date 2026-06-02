@@ -1,0 +1,198 @@
+/* =====================================================================
+   Glitch Cat Club — Design System
+   Extracted from https://glitchcatclub.com via Firecrawl (confidence 0.93)
+   Style: Dark "glitch zine" — black canvas, warm cream text, hot-pink
+   accent, condensed Impact-style display headings, monospace body, and
+   wonky asymmetric "glitch-cut" button corners with hard offset shadows.
+   ===================================================================== */
+
+:root {
+  /* ---- Core palette ---- */
+  --gcc-bg:          #070707;  /* near-black canvas              */
+  --gcc-bg-2:        #111010;  /* raised dark surface            */
+  --gcc-card:        #15110F;  /* default dark card              */
+  --gcc-card-cream:  #F3E6C8;  /* highlighted "cream" card       */
+
+  --gcc-cream:       #F3E6C8;  /* primary text on dark           */
+  --gcc-cream-dim:   #CCC1A8;  /* secondary text                 */
+  --gcc-mute:        #867F6E;  /* borders, muted labels          */
+  --gcc-ink:         #070707;  /* text on cream / pink           */
+
+  /* ---- Accents ---- */
+  --gcc-pink:        #EF4F7A;  /* primary accent / CTA           */
+  --gcc-pink-hot:    #FF6B92;  /* hover                          */
+  --gcc-link:        #EF4F7A;
+
+  /* ---- Borders ---- */
+  --gcc-border:      #867F6E;  /* muted cream-grey hairline      */
+  --gcc-border-w:    1.5px;
+
+  /* ---- Radius: the signature wonky "glitch-cut" corners ---- */
+  --gcc-radius:      6px 14px 7px 13px; /* TL TR BR BL, intentionally uneven */
+  --gcc-radius-card: 4px;
+
+  /* ---- Hard offset shadows (with subtle inset bevels) ---- */
+  --gcc-shadow-btn:  7px 7px 0 0 #000,
+                     -4px -4px 0 0 rgba(0,0,0,.22) inset,
+                     3px 3px 0 0 rgba(255,255,255,.22) inset;
+  --gcc-shadow-card: 7px 7px 0 0 #000;
+
+  /* ---- Typography ---- */
+  --gcc-font-display: "Changa One", Impact, "Haettenschweiler",
+                      "Arial Narrow Bold", sans-serif;
+  --gcc-font-body:    Inter, system-ui, -apple-system, sans-serif;
+  --gcc-font-mono:    "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gcc-fs-display: clamp(3rem, 9vw, 6.75rem); /* ~108px max            */
+  --gcc-fs-h2:      clamp(2rem, 5vw, 3rem);
+  --gcc-fs-h3:      1.05rem;
+  --gcc-fs-body:    0.875rem;  /* 14px on source                        */
+  --gcc-fs-mono:    0.8rem;
+  --gcc-fs-eyebrow: 0.7rem;
+
+  /* ---- Spacing (12px base unit, matching source) ---- */
+  --gcc-space-1: 6px;
+  --gcc-space-2: 12px;
+  --gcc-space-3: 18px;
+  --gcc-space-4: 24px;
+  --gcc-space-6: 36px;
+  --gcc-space-8: 48px;
+}
+
+/* To load the source fonts, add to your <head>:
+   <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Inter:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+   (falls back to Impact / system sans / system mono if omitted) */
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+.gcc {
+  background: var(--gcc-bg);
+  color: var(--gcc-cream);
+  font-family: var(--gcc-font-body);
+  font-size: var(--gcc-fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gcc h1, .gcc h2, .gcc h3 {
+  font-family: var(--gcc-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+  margin: 0 0 var(--gcc-space-2);
+}
+
+.gcc-display { font-size: var(--gcc-fs-display); line-height: 0.9; }
+.gcc-accent  { color: var(--gcc-pink); }
+
+/* Mono eyebrow label, e.g. "// WHAT THIS IS" */
+.gcc-eyebrow {
+  font-family: var(--gcc-font-mono);
+  font-size: var(--gcc-fs-eyebrow);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gcc-mute);
+}
+
+.gcc-mono { font-family: var(--gcc-font-mono); font-size: var(--gcc-fs-mono); }
+
+/* =====================================================================
+   Buttons — wonky glitch-cut corners + hard shadow
+   ===================================================================== */
+.gcc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gcc-space-1);
+  font-family: var(--gcc-font-mono);
+  font-weight: 500;
+  font-size: var(--gcc-fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: var(--gcc-space-2) var(--gcc-space-4);
+  border: 2px solid #000;
+  border-radius: var(--gcc-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .06s ease, box-shadow .06s ease;
+}
+.gcc-btn:active { transform: translate(4px, 4px); box-shadow: 3px 3px 0 0 #000; }
+
+.gcc-btn--primary {
+  background: var(--gcc-pink);
+  color: var(--gcc-ink);
+  box-shadow: var(--gcc-shadow-btn);
+}
+.gcc-btn--primary:hover { background: var(--gcc-pink-hot); }
+
+.gcc-btn--ghost {
+  background: transparent;
+  color: var(--gcc-cream);
+  border-color: var(--gcc-mute);
+  box-shadow: 7px 7px 0 0 #000, -2px -2px 0 0 rgba(255,255,255,.04) inset;
+}
+
+/* =====================================================================
+   Cards — dark by default, one "cream" highlight variant
+   ===================================================================== */
+.gcc-card {
+  background: var(--gcc-card);
+  color: var(--gcc-cream);
+  border: var(--gcc-border-w) solid var(--gcc-border);
+  border-radius: var(--gcc-radius-card);
+  padding: var(--gcc-space-4);
+  box-shadow: var(--gcc-shadow-card);
+}
+.gcc-card--cream {              /* the highlighted card */
+  background: var(--gcc-card-cream);
+  color: var(--gcc-ink);
+  border-color: #000;
+}
+.gcc-card--cream .gcc-card__num,
+.gcc-card--cream .gcc-eyebrow { color: var(--gcc-ink); }
+
+.gcc-card__num {
+  font-family: var(--gcc-font-display);
+  font-size: 2.75rem;
+  line-height: 1;
+  color: var(--gcc-cream);
+  margin-bottom: var(--gcc-space-2);
+}
+.gcc-card__title {
+  font-family: var(--gcc-font-display);
+  text-transform: uppercase;
+  font-size: var(--gcc-fs-h3);
+  margin: var(--gcc-space-1) 0 var(--gcc-space-2);
+}
+.gcc-card__body { font-family: var(--gcc-font-mono); font-size: var(--gcc-fs-mono); color: var(--gcc-cream-dim); }
+.gcc-card--cream .gcc-card__body { color: #4a4032; }
+
+/* =====================================================================
+   Badge / tag (mono pill)
+   ===================================================================== */
+.gcc-badge {
+  display: inline-block;
+  font-family: var(--gcc-font-mono);
+  font-size: var(--gcc-fs-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px var(--gcc-space-2);
+  border: 1px solid var(--gcc-border);
+  border-radius: 3px;
+  color: var(--gcc-cream-dim);
+}
+.gcc-badge--pink { background: var(--gcc-pink); color: var(--gcc-ink); border-color: #000; }
+
+/* =====================================================================
+   Header / nav
+   ===================================================================== */
+.gcc-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gcc-space-3);
+  padding: var(--gcc-space-3) var(--gcc-space-4);
+}
+.gcc-header__spacer { flex: 1; }
+.gcc-nav { display: flex; gap: var(--gcc-space-3); align-items: center; }
+.gcc-nav a { color: var(--gcc-cream-dim); text-decoration: none; font-family: var(--gcc-font-mono); font-size: var(--gcc-fs-eyebrow); letter-spacing: .12em; text-transform: uppercase; }
+.gcc-nav a:hover { color: var(--gcc-pink); }

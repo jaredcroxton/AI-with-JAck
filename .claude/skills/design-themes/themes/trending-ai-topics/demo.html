@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Trending AI Topics style</title>
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    /* Demo-only layout (not part of the reusable theme) */
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: var(--tat-space-8) var(--tat-space-6); }
+    .grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--tat-space-8); align-items: start; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tat-space-4); margin-top: var(--tat-space-8); }
+    .stat b { display: block; font-size: 2.5rem; line-height: 1; }
+    .stat span { color: var(--tat-muted); font-size: var(--tat-fs-small); text-transform: uppercase; letter-spacing: .06em; }
+    .feature-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--tat-space-4); }
+    .stack > * + * { margin-top: var(--tat-space-3); }
+    @media (max-width: 820px){ .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="tat">
+
+  <header class="tat-header">
+    <div class="tat-brand"><span class="tat-brand__mark"></span> Trending AI Topics</div>
+    <nav class="tat-nav">
+      <a href="#">Radar</a><a href="#">Sources</a><a href="#">All Topics</a><a href="#">Pricing</a>
+    </nav>
+    <a class="tat-btn tat-btn--yellow" href="#">📨 Daily email</a>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+
+      <!-- Left: hero -->
+      <section>
+        <h1 class="tat-display">Know what<br><span class="tat-accent">matters</span><br>today.</h1>
+        <p style="max-width: 38ch; color: var(--tat-ink-soft);">
+          A dashboard theme extracted from trendingaitopics.com — warm cream canvas,
+          hard black borders, square corners, bold red &amp; lime accents.
+        </p>
+        <div class="stack" style="margin-top: var(--tat-space-6);">
+          <a class="tat-btn tat-btn--ghost" href="#">See latest shortlist</a>
+          <a class="tat-btn tat-btn--primary" href="#">Get daily email →</a>
+        </div>
+
+        <div class="stats">
+          <div class="tat-card stat"><b>12</b><span>topics</span></div>
+          <div class="tat-card stat"><b>75</b><span>top score</span></div>
+          <div class="tat-card stat"><b>4</b><span>sources</span></div>
+        </div>
+      </section>
+
+      <!-- Right: feature card -->
+      <section class="tat-card tat-card--feature">
+        <div class="feature-head">
+          <div>
+            <span class="tat-badge tat-badge--label">Latest shortlist</span>
+            <h2 style="margin-top: var(--tat-space-3);">Claude Code workflows</h2>
+          </div>
+          <div class="tat-score"><b>75</b><span>priority</span></div>
+        </div>
+
+        <p style="color: var(--tat-ink-soft);">
+          Why it's rising: growing attention from creators and recent articles.
+        </p>
+
+        <div class="stack" style="margin-top: var(--tat-space-4);">
+          <div class="tat-signal">
+            <span class="tat-signal__dot"></span>
+            <span class="tat-signal__label">More demos and explainers appearing</span>
+            <span class="tat-signal__strength">Strong</span>
+          </div>
+          <div class="tat-signal">
+            <span class="tat-signal__dot"></span>
+            <span class="tat-signal__label">Articles, guides &amp; comparisons appearing</span>
+            <span class="tat-signal__strength">Strong</span>
+          </div>
+          <div>
+            <div class="tat-row__meta" style="margin-bottom: 6px;">Momentum</div>
+            <div class="tat-progress"><i style="width: 82%;"></i></div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--tat-space-6);">
+          <div class="tat-row"><span class="tat-row__rank">01</span><span class="tat-row__title">Hermes Agent</span><span class="tat-row__meta">61 / 100</span></div>
+          <div class="tat-row"><span class="tat-row__rank">02</span><span class="tat-row__title">AI research agents</span><span class="tat-row__meta">76 / 100</span></div>
+          <div class="tat-row"><span class="tat-row__rank">03</span><span class="tat-row__title">AI deep research workflows</span><span class="tat-row__meta">58 / 100</span></div>
+          <div class="tat-row"><span class="tat-row__rank">04</span><span class="tat-row__title">Browser Run AI Agents</span><span class="tat-row__meta">49 / 100</span></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
