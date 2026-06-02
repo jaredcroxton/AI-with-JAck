@@ -1,16 +1,27 @@
 ---
 name: design-themes
-description: A library of reusable website design themes extracted from real sites (colors, fonts, components as drop-in CSS). Use when the user wants to build or restyle an HTML page/dashboard in the look of one of the saved themes ("use the glitch cat style", "make a dashboard in the trending AI topics style"), wants to see/list the available themes, or wants to extract and ADD a new theme from a URL.
+description: The library of dashboard / website design themes (colors, fonts, components as drop-in CSS). Use this to BUILD a dashboard or page in a saved style, to CHANGE or SWITCH the theme/style of an existing dashboard ("change my dashboard to the cyber-grunge style", "restyle this in trendhustler"), to LIST the available designs, or to ADD a new theme from a URL.
 ---
 
-# Design Themes
+# Design Themes — Dashboard Design Library
 
-A catalog of design systems extracted from real websites using the Firecrawl
-`branding` scrape + a screenshot for visual verification. Each theme is a
-self-contained, framework-agnostic CSS file (CSS variables + helper classes)
-plus a demo dashboard and a reference README.
+The home for all saved dashboard designs. Use it to **build a new dashboard** in
+a saved style, or to **switch an existing dashboard to a different theme**. Each
+theme is a self-contained, framework-agnostic CSS file (CSS variables + helper
+classes) plus sample pages and a reference README.
 
 > **Installing this skill for use across all your projects:** see `INSTALL.md`.
+
+## Switch / change your dashboard theme
+When the user says "change/switch my dashboard to the **<name>** style":
+1. Identify the target theme from the catalog below.
+2. Read that theme's `README.md` + `theme.css`.
+3. Rebuild the dashboard markup with the new theme's prefix classes (e.g. swap
+   `tat-*` for `cgd-*`) and wrapper class on `<body>`. Note: themes are NOT
+   drop-in CSS swaps — each uses its own class prefix — so re-skin the markup,
+   keeping the content/structure and applying the new theme's components.
+4. Preserve the signature details of the target theme (corner style, shadows,
+   accent usage).
 
 ## Theme catalog
 
@@ -23,7 +34,9 @@ plus a demo dashboard and a reference README.
 
 Each theme folder contains:
 - `theme.css` — design tokens (`--<prefix>-*`) + component classes
-- `demo.html` — a working sample dashboard using the theme
+- `demo.html` — a working sample page using the theme
+- `dashboard.html` — a fuller dashboard example (where present; e.g. the
+  "Trend Radar" analytics dashboard in `trending-ai-topics/`)
 - `README.md` — palette, type scale, signature details, usage
 
 ## How to APPLY a theme (when the user wants to build something)

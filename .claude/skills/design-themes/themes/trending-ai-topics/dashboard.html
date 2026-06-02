@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trend Radar — Dashboard</title>
+  <style>
+/* =====================================================================
+   Trending AI Topics — Design System (inlined, self-contained)
+   Neo-brutalist: warm cream canvas, hard black borders, square corners,
+   bold red + lime accents.
+   ===================================================================== */
+:root {
+  --tat-bg:#F4F0DC; --tat-bg-alt:#FAF3D8; --tat-surface:#FEF7E4; --tat-surface-2:#FFF0D4;
+  --tat-ink:#001806; --tat-ink-soft:#2E3A2E; --tat-muted:#5C6657;
+  --tat-red:#FF3B12; --tat-red-deep:#E22600; --tat-green:#7CC000; --tat-green-soft:#C8E89A; --tat-yellow:#FFE45C;
+  --tat-border:var(--tat-ink); --tat-border-w:2px; --tat-border-w-bold:3px;
+  --tat-radius:0px; --tat-radius-pill:999px;
+  --tat-shadow:4px 4px 0 0 var(--tat-ink); --tat-shadow-lg:6px 6px 0 0 var(--tat-ink);
+  --tat-font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji";
+  --tat-fs-display:clamp(2.75rem,7vw,6.5rem); --tat-fs-h1:clamp(2rem,4vw,3.25rem); --tat-fs-h2:clamp(1.5rem,3vw,2.25rem);
+  --tat-fs-h3:1.25rem; --tat-fs-body:1.18rem; --tat-fs-small:0.85rem;
+  --tat-weight-black:800; --tat-weight-bold:700; --tat-weight-reg:400;
+  --tat-space-1:4px; --tat-space-2:8px; --tat-space-3:12px; --tat-space-4:16px; --tat-space-6:24px; --tat-space-8:32px; --tat-space-12:48px;
+}
+.tat { background:var(--tat-bg); color:var(--tat-ink); font-family:var(--tat-font); font-size:var(--tat-fs-body); line-height:1.5; -webkit-font-smoothing:antialiased; }
+.tat h1,.tat h2,.tat h3 { line-height:1.02; letter-spacing:-0.02em; font-weight:var(--tat-weight-black); margin:0 0 var(--tat-space-4); }
+.tat-display { font-size:var(--tat-fs-display); font-weight:var(--tat-weight-black); line-height:0.95; letter-spacing:-0.03em; }
+.tat-accent { color:var(--tat-red); }
+.tat-card { background:var(--tat-surface); border:var(--tat-border-w) solid var(--tat-border); border-radius:var(--tat-radius); padding:var(--tat-space-6); }
+.tat-card--feature { background:var(--tat-surface-2); border-width:var(--tat-border-w-bold); box-shadow:var(--tat-shadow-lg); }
+.tat-card--raised { box-shadow:var(--tat-shadow); }
+.tat-btn { display:inline-flex; align-items:center; gap:var(--tat-space-2); font-family:inherit; font-weight:var(--tat-weight-bold); font-size:var(--tat-fs-small); text-transform:uppercase; letter-spacing:0.04em; padding:var(--tat-space-3) var(--tat-space-6); border:var(--tat-border-w) solid var(--tat-ink); border-radius:var(--tat-radius); cursor:pointer; text-decoration:none; transition:transform .05s ease; }
+.tat-btn:active { transform:translate(2px,2px); }
+.tat-btn--primary { background:var(--tat-ink); color:var(--tat-bg); }
+.tat-btn--ghost { background:transparent; color:var(--tat-ink); }
+.tat-btn--yellow { background:var(--tat-yellow); color:var(--tat-ink); border-radius:var(--tat-radius-pill); }
+.tat-badge { display:inline-block; font-size:var(--tat-fs-small); font-weight:var(--tat-weight-bold); text-transform:uppercase; letter-spacing:0.06em; padding:var(--tat-space-1) var(--tat-space-3); border:var(--tat-border-w) solid var(--tat-ink); }
+.tat-badge--red { background:var(--tat-red); color:#fff; }
+.tat-badge--green { background:var(--tat-green); color:var(--tat-ink); }
+.tat-badge--label { background:var(--tat-ink); color:var(--tat-bg); }
+.tat-score { display:inline-grid; place-items:center; background:var(--tat-red); color:#fff; border:var(--tat-border-w-bold) solid var(--tat-ink); padding:var(--tat-space-3) var(--tat-space-4); font-weight:var(--tat-weight-black); line-height:1; }
+.tat-score b { font-size:2.25rem; display:block; }
+.tat-score span { font-size:0.7rem; text-transform:uppercase; letter-spacing:.08em; }
+.tat-signal { display:flex; align-items:center; gap:var(--tat-space-3); border:var(--tat-border-w) solid var(--tat-ink); background:var(--tat-green-soft); padding:var(--tat-space-2) var(--tat-space-3); }
+.tat-signal__dot { width:10px; height:10px; background:var(--tat-green); border:1px solid var(--tat-ink); border-radius:50%; flex:none; }
+.tat-signal__label { flex:1; }
+.tat-signal__strength { font-size:var(--tat-fs-small); font-weight:var(--tat-weight-bold); text-transform:uppercase; }
+.tat-progress { height:14px; border:var(--tat-border-w) solid var(--tat-ink); background:var(--tat-surface); }
+.tat-progress > i { display:block; height:100%; background:var(--tat-green); }
+.tat-row { display:flex; align-items:center; gap:var(--tat-space-4); border-top:var(--tat-border-w) solid var(--tat-ink); padding:var(--tat-space-4) var(--tat-space-2); font-weight:var(--tat-weight-bold); }
+.tat-row__rank { color:var(--tat-muted); font-variant-numeric:tabular-nums; }
+.tat-row__title { flex:1; }
+.tat-row__meta { color:var(--tat-muted); font-size:var(--tat-fs-small); }
+.tat-header { display:flex; align-items:center; justify-content:space-between; gap:var(--tat-space-6); padding:var(--tat-space-4) var(--tat-space-6); border-bottom:var(--tat-border-w) solid var(--tat-ink); }
+.tat-brand { display:flex; align-items:center; gap:var(--tat-space-2); font-weight:var(--tat-weight-black); }
+.tat-brand__mark { width:22px; height:22px; background:var(--tat-red); border:var(--tat-border-w) solid var(--tat-ink); }
+.tat-nav { display:flex; gap:var(--tat-space-6); }
+.tat-nav a { color:var(--tat-ink); text-decoration:none; font-size:var(--tat-fs-small); font-weight:var(--tat-weight-bold); }
+.tat-nav a:hover { color:var(--tat-red); }
+
+/* ---- Dashboard layout (page-specific, built on the theme tokens) ---- */
+* { box-sizing:border-box; }
+body { margin:0; }
+.layout { display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
+.sidebar { border-right:var(--tat-border-w) solid var(--tat-ink); padding:var(--tat-space-6); background:var(--tat-bg-alt); }
+.side-link { display:flex; align-items:center; gap:var(--tat-space-2); padding:var(--tat-space-2) var(--tat-space-3); margin-bottom:var(--tat-space-1); font-weight:var(--tat-weight-bold); font-size:0.95rem; text-decoration:none; color:var(--tat-ink); border:var(--tat-border-w) solid transparent; }
+.side-link--active { background:var(--tat-ink); color:var(--tat-bg); }
+.side-link:hover:not(.side-link--active) { border-color:var(--tat-ink); }
+.side-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--tat-muted); margin:var(--tat-space-6) 0 var(--tat-space-2); }
+.main { padding:var(--tat-space-8); }
+.page-head { display:flex; align-items:flex-end; justify-content:space-between; gap:var(--tat-space-6); flex-wrap:wrap; margin-bottom:var(--tat-space-8); }
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--tat-space-4); margin-bottom:var(--tat-space-8); }
+.kpi__label { font-size:0.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--tat-muted); }
+.kpi__value { font-size:2.6rem; font-weight:var(--tat-weight-black); line-height:1; margin:var(--tat-space-2) 0; }
+.kpi__delta { font-size:0.85rem; font-weight:var(--tat-weight-bold); }
+.up { color:var(--tat-green); } .down { color:var(--tat-red); }
+.cols { display:grid; grid-template-columns:1.5fr 1fr; gap:var(--tat-space-4); }
+.bars { display:flex; align-items:flex-end; gap:var(--tat-space-3); height:180px; margin-top:var(--tat-space-4); }
+.bar { flex:1; background:var(--tat-green); border:var(--tat-border-w) solid var(--tat-ink); }
+.bar:nth-child(odd){ background:var(--tat-yellow); }
+.bar--peak { background:var(--tat-red); }
+.bar-labels { display:flex; gap:var(--tat-space-3); margin-top:var(--tat-space-2); }
+.bar-labels span { flex:1; text-align:center; font-size:0.72rem; color:var(--tat-muted); text-transform:uppercase; }
+.stack > * + * { margin-top:var(--tat-space-3); }
+.section-title { display:flex; align-items:center; gap:var(--tat-space-3); margin:0 0 var(--tat-space-4); }
+@media (max-width:980px){ .kpis{grid-template-columns:repeat(2,1fr);} .cols{grid-template-columns:1fr;} }
+@media (max-width:720px){ .layout{grid-template-columns:1fr;} .sidebar{display:none;} }
+  </style>
+</head>
+<body class="tat">
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="tat-brand" style="margin-bottom:var(--tat-space-8);">
+        <span class="tat-brand__mark"></span> Trend Radar
+      </div>
+      <a class="side-link side-link--active" href="#">📊 Overview</a>
+      <a class="side-link" href="#">📈 Topics</a>
+      <a class="side-link" href="#">🔔 Signals</a>
+      <a class="side-link" href="#">📰 Sources</a>
+      <div class="side-label">Account</div>
+      <a class="side-link" href="#">⚙️ Settings</a>
+      <a class="side-link" href="#">👤 Profile</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="page-head">
+        <div>
+          <div class="tat-badge tat-badge--label" style="margin-bottom:var(--tat-space-3);">Live · Updated 4m ago</div>
+          <h1 class="tat-display" style="font-size:clamp(2rem,4vw,3.25rem);">What's <span class="tat-accent">trending</span> today.</h1>
+        </div>
+        <div style="display:flex; gap:var(--tat-space-3);">
+          <a class="tat-btn tat-btn--ghost" href="#">Export</a>
+          <a class="tat-btn tat-btn--primary" href="#">+ New Report</a>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <section class="kpis">
+        <div class="tat-card tat-card--raised">
+          <div class="kpi__label">Topics Tracked</div>
+          <div class="kpi__value">128</div>
+          <div class="kpi__delta up">▲ +12 this week</div>
+        </div>
+        <div class="tat-card tat-card--raised">
+          <div class="kpi__label">Avg. Priority</div>
+          <div class="kpi__value">71</div>
+          <div class="kpi__delta up">▲ +4.2 pts</div>
+        </div>
+        <div class="tat-card tat-card--raised">
+          <div class="kpi__label">Strong Signals</div>
+          <div class="kpi__value">34</div>
+          <div class="kpi__delta up">▲ +9</div>
+        </div>
+        <div class="tat-card tat-card--raised">
+          <div class="kpi__label">Fading</div>
+          <div class="kpi__value">7</div>
+          <div class="kpi__delta down">▼ -3</div>
+        </div>
+      </section>
+
+      <!-- Two columns -->
+      <section class="cols">
+
+        <!-- Left: ranked topics + chart -->
+        <div class="stack">
+          <div class="tat-card tat-card--feature">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:var(--tat-space-4);">
+              <div>
+                <div class="tat-badge tat-badge--label">#1 Breakout</div>
+                <h2 style="margin-top:var(--tat-space-3);">Claude Code workflows</h2>
+                <p style="color:var(--tat-ink-soft); margin:0;">Rising fast across creators and dev blogs this week.</p>
+              </div>
+              <div class="tat-score"><b>92</b><span>priority</span></div>
+            </div>
+          </div>
+
+          <div class="tat-card">
+            <h3 class="section-title">Weekly Volume</h3>
+            <div class="bars">
+              <div class="bar" style="height:45%"></div>
+              <div class="bar" style="height:60%"></div>
+              <div class="bar" style="height:38%"></div>
+              <div class="bar" style="height:72%"></div>
+              <div class="bar" style="height:55%"></div>
+              <div class="bar bar--peak" style="height:100%"></div>
+              <div class="bar" style="height:80%"></div>
+            </div>
+            <div class="bar-labels">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+          </div>
+
+          <div class="tat-card">
+            <h3 class="section-title">Ranked Shortlist</h3>
+            <div class="tat-row"><span class="tat-row__rank">01</span><span class="tat-row__title">AI research agents</span><span class="tat-row__meta">88 / 100</span></div>
+            <div class="tat-row"><span class="tat-row__rank">02</span><span class="tat-row__title">Browser-run AI agents</span><span class="tat-row__meta">81 / 100</span></div>
+            <div class="tat-row"><span class="tat-row__rank">03</span><span class="tat-row__title">AI deep research workflows</span><span class="tat-row__meta">76 / 100</span></div>
+            <div class="tat-row"><span class="tat-row__rank">04</span><span class="tat-row__title">Local LLM fine-tuning</span><span class="tat-row__meta">69 / 100</span></div>
+            <div class="tat-row"><span class="tat-row__rank">05</span><span class="tat-row__title">Voice UI assistants</span><span class="tat-row__meta">63 / 100</span></div>
+          </div>
+        </div>
+
+        <!-- Right: signals + momentum + CTA -->
+        <div class="stack">
+          <div class="tat-card">
+            <h3 class="section-title">Signals</h3>
+            <div class="stack">
+              <div class="tat-signal"><span class="tat-signal__dot"></span><span class="tat-signal__label">More demos &amp; explainers appearing</span><span class="tat-signal__strength">Strong</span></div>
+              <div class="tat-signal"><span class="tat-signal__dot"></span><span class="tat-signal__label">Guides &amp; comparisons published</span><span class="tat-signal__strength">Strong</span></div>
+              <div class="tat-signal" style="background:var(--tat-surface-2);"><span class="tat-signal__dot" style="background:var(--tat-yellow);"></span><span class="tat-signal__label">Search interest climbing</span><span class="tat-signal__strength">Medium</span></div>
+            </div>
+          </div>
+
+          <div class="tat-card">
+            <h3 class="section-title">Momentum</h3>
+            <div class="stack">
+              <div>
+                <div class="tat-row__meta" style="margin-bottom:6px;">Adoption</div>
+                <div class="tat-progress"><i style="width:84%;"></i></div>
+              </div>
+              <div>
+                <div class="tat-row__meta" style="margin-bottom:6px;">Coverage</div>
+                <div class="tat-progress"><i style="width:67%;"></i></div>
+              </div>
+              <div>
+                <div class="tat-row__meta" style="margin-bottom:6px;">Sentiment</div>
+                <div class="tat-progress"><i style="width:91%;"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tat-card tat-card--feature" style="text-align:center;">
+            <h3 style="margin-bottom:var(--tat-space-2);">Get the daily radar</h3>
+            <p style="color:var(--tat-ink-soft); margin-top:0;">One email. The signals that matter.</p>
+            <a class="tat-btn tat-btn--yellow" href="#" style="justify-content:center; width:100%;">📨 Subscribe</a>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+</body>
+</html>
