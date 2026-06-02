@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue Desk — TrendHustler style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Pulls the saved TrendHustler theme straight from the design-themes skill -->
+  <link rel="stylesheet" href=".claude/skills/design-themes/themes/trendhustler/theme.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: var(--th-space-8) var(--th-space-4); }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--th-space-4); }
+    .panels { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--th-space-4); margin-top: var(--th-space-8); }
+    .row { display: flex; align-items: center; justify-content: space-between; padding: var(--th-space-3) 0; border-bottom: 1px solid var(--th-border); font-family: var(--th-font-mono); font-size: var(--th-fs-mono); }
+    .row:last-child { border-bottom: none; }
+    @media (max-width: 760px){ .stats { grid-template-columns: repeat(2,1fr); } .panels { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="th">
+
+  <!-- Ticker strip -->
+  <div class="th-ticker">
+    <span class="th-ticker__item">REVENUE <b class="th-up">$48.2K ▲</b></span>
+    <span class="th-ticker__item">CHURN <b class="th-down">2.4% ▼</b></span>
+    <span class="th-ticker__item">SIGNUPS <b class="th-up">312 ▲</b></span>
+    <span class="th-ticker__item">REFUNDS <b class="th-down">$1.1K ▼</b></span>
+    <span class="th-ticker__item">MRR <b class="th-up">$16.9K ▲</b></span>
+  </div>
+
+  <!-- Top bar -->
+  <header class="th-header">
+    <a class="th-btn th-btn--primary" href="#">▶ New Hustle</a>
+    <a class="th-btn th-btn--ghost" href="#">🔄 Refresh · live</a>
+    <span class="th-header__spacer"></span>
+    <nav class="th-nav"><a href="#">Overview</a><a href="#">Orders</a><a href="#">Payouts</a></nav>
+  </header>
+
+  <main class="wrap">
+    <div class="th-eyebrow">● live from the street · updated 2m ago</div>
+    <h1 class="th-display"><span class="th-green">CASH</span>DESK</h1>
+
+    <!-- KPI cards -->
+    <section class="stats">
+      <div class="th-card th-card--green">
+        <div class="th-stat__label">Revenue (30d)</div>
+        <div class="th-stat__num th-green">$48.2K</div>
+        <div class="th-stat__sub">▲ +12.4% vs last</div>
+      </div>
+      <div class="th-card th-card--gold">
+        <div class="th-stat__label">Active Deals</div>
+        <div class="th-stat__num th-gold">87</div>
+        <div class="th-stat__sub">14 closing soon</div>
+      </div>
+      <div class="th-card">
+        <div class="th-stat__label">New Signups</div>
+        <div class="th-stat__num">312</div>
+        <div class="th-stat__sub">▲ this week</div>
+      </div>
+      <div class="th-card">
+        <div class="th-stat__label">Churn</div>
+        <div class="th-stat__num th-pink">2.4%</div>
+        <div class="th-stat__sub">▼ down from 3.1%</div>
+      </div>
+    </section>
+
+    <!-- Detail panels -->
+    <section class="panels">
+      <div class="th-card">
+        <div class="th-section-head">
+          <h2>Recent Orders</h2>
+          <span class="th-section-head__note">// last 6</span>
+        </div>
+        <div class="row"><span>#A-1042 · Prompt Gold</span><span class="th-up">$1,200 ▲</span></div>
+        <div class="row"><span>#A-1041 · Agent Swarm</span><span class="th-up">$840 ▲</span></div>
+        <div class="row"><span>#A-1040 · Drip Models</span><span class="th-down">$320 ▼</span></div>
+        <div class="row"><span>#A-1039 · Vibe Coding</span><span class="th-up">$2,050 ▲</span></div>
+        <div class="row"><span>#A-1038 · BlendrMaxx</span><span class="th-up">$610 ▲</span></div>
+        <div class="row"><span>#A-1037 · Fade Pack</span><span class="th-down">$90 ▼</span></div>
+      </div>
+
+      <div class="th-card th-card--gold">
+        <div class="th-section-head">
+          <h2 class="th-gold">Premium Drop</h2>
+          <span class="th-section-head__note">// gem</span>
+        </div>
+        <p class="th-mono" style="color:var(--th-text-dim)">Closing window on this week's top signal.</p>
+        <div class="th-stat__num th-gold" style="font-size:3.5rem;">SoFusionLLM</div>
+        <div style="display:flex; gap:var(--th-space-2); flex-wrap:wrap; margin:var(--th-space-3) 0;">
+          <span class="th-tag">● Market Open</span>
+          <span class="th-tag th-pink">Fade Risk</span>
+        </div>
+        <a class="th-btn th-btn--gold" href="#" style="width:100%; justify-content:center;">★ Cop It Now</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
