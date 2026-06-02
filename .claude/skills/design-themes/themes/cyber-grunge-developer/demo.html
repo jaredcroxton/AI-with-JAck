@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Cyber-Grunge Developer style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: var(--cgd-space-12) var(--cgd-space-6); }
+    .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: var(--cgd-space-12); align-items: center; }
+    .stack > * + * { margin-top: var(--cgd-space-4); }
+    .cta-row { display: flex; gap: var(--cgd-space-3); flex-wrap: wrap; align-items: center; }
+    /* Right column: floating panel collage over a "robot" stage */
+    .stage { position: relative; min-height: 460px; }
+    .float { position: absolute; width: 230px; }
+    .f1 { top: 0; left: 0; }
+    .f2 { top: 150px; right: 0; }
+    .f3 { bottom: 0; left: 30px; width: 250px; }
+    .robot-slot {
+      position: absolute; right: 10px; bottom: 20px;
+      width: 240px; height: 320px;
+      display: grid; place-items: center; text-align: center;
+      border-radius: var(--cgd-radius);
+      background: radial-gradient(circle at 50% 35%, rgba(0,210,255,.14), transparent 70%);
+    }
+    /* The hero render: save the reference image into this folder as hero.png */
+    .robot-slot img {
+      max-width: 100%; max-height: 100%;
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(0,210,255,.25));
+    }
+    .robot-slot__hint {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+      border: 1px dashed var(--cgd-border-blue); border-radius: var(--cgd-radius);
+      color: var(--cgd-blue); font-family: var(--cgd-font-mono); font-size: .72rem; padding: 12px;
+    }
+    .gauge { font-family: var(--cgd-font-mono); font-weight:700; font-size:2rem; color: var(--cgd-red); }
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } .stage{ min-height: 540px; } }
+  </style>
+</head>
+<body class="cgd">
+
+  <header class="cgd-header">
+    <div class="cgd-brand"><span class="cgd-brand__mark"></span> NOCTURNE&nbsp;Ops</div>
+    <span class="cgd-header__spacer"></span>
+    <nav class="cgd-nav"><a href="#">Product</a><a href="#">Docs</a><a href="#">Pricing</a></nav>
+    <span class="cgd-status"><span class="cgd-status__dot"></span> System Status: Nominal</span>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+
+      <!-- Left: the hook -->
+      <div class="stack">
+        <span class="cgd-eyebrow">// for builders who ship at 3am</span>
+        <h1 class="cgd-display">Stop fighting your stack.<br><span class="cgd-blue">Ship it</span> before sunrise.</h1>
+        <p style="max-width: 46ch;">
+          One calm control plane for the chaos — metrics, errors, and feature
+          requests in a single holographic dashboard so you can stop guessing
+          and start shipping.
+        </p>
+        <div class="cta-row">
+          <a class="cgd-btn cgd-btn--primary" href="#">Deploy &amp; Pray ▶</a>
+          <a class="cgd-btn cgd-btn--ghost" href="#">Read the Docs</a>
+          <span class="cgd-scribble">why is this so hard?!</span>
+        </div>
+      </div>
+
+      <!-- Right: floating glass panels + robot stage -->
+      <div class="stage">
+        <div class="cgd-card cgd-card--breathe float f1">
+          <div class="cgd-metric__label">Daily Active Users</div>
+          <div class="cgd-metric__value">23,842</div>
+          <div class="cgd-metric__delta">▲ +18.2% this week</div>
+        </div>
+
+        <div class="cgd-card float f2">
+          <div class="cgd-metric__label">System Load</div>
+          <div class="gauge">97%</div>
+          <div class="cgd-mono cgd-red">⚠ overload imminent</div>
+        </div>
+
+        <div class="cgd-card cgd-card--red float f3">
+          <div class="cgd-alert" style="border:none;box-shadow:none;background:none;padding:0;">
+            ⚠ <strong>ERROR</strong>
+          </div>
+          <div class="cgd-mono" style="margin:6px 0 10px;color:var(--cgd-body)">Server down · retry?</div>
+          <div class="cgd-feature"><span class="cgd-feature__dot"></span> Dashboard integration</div>
+          <div class="cgd-feature"><span class="cgd-feature__dot"></span> Dark mode</div>
+          <div class="cgd-feature"><span class="cgd-feature__dot"></span> Export data</div>
+        </div>
+
+        <div class="robot-slot">
+          <span class="robot-slot__hint">[ save the reference image<br>in this folder as <b>hero.png</b> ]</span>
+          <img src="hero.png" alt="Robot hero" onerror="this.style.display='none'" />
+        </div>
+      </div>
+
+    </section>
+
+    <div style="margin-top: var(--cgd-space-12); display:flex; gap:var(--cgd-space-3); flex-wrap:wrap;">
+      <span class="cgd-badge">v2.4.0 stable</span>
+      <span class="cgd-badge--red cgd-badge">3 incidents</span>
+      <span class="cgd-badge--yellow cgd-badge">137 feature requests</span>
+    </div>
+  </main>
+</body>
+</html>
