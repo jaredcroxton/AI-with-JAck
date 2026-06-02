@@ -1,0 +1,250 @@
+/* =====================================================================
+   Trending AI Topics — Design System
+   Extracted from https://www.trendingaitopics.com via Firecrawl
+   Style: Neo-brutalist (warm cream canvas, hard black borders, sharp
+   corners, bold red + lime accents).
+   Drop this file into any project and use the CSS variables + helper
+   classes below to reproduce the look.
+   ===================================================================== */
+
+:root {
+  /* ---- Core palette ---- */
+  --tat-bg:            #F4F0DC;  /* warm cream page canvas        */
+  --tat-bg-alt:        #FAF3D8;  /* slightly warmer panel wash    */
+  --tat-surface:       #FEF7E4;  /* card / panel background       */
+  --tat-surface-2:     #FFF0D4;  /* secondary / highlighted card  */
+
+  --tat-ink:           #001806;  /* near-black green — text & borders */
+  --tat-ink-soft:      #2E3A2E;  /* muted body text               */
+  --tat-muted:         #5C6657;  /* captions, metadata            */
+
+  /* ---- Accents ---- */
+  --tat-red:           #FF3B12;  /* primary accent / emphasis     */
+  --tat-red-deep:      #E22600;  /* hover / pressed red           */
+  --tat-green:         #7CC000;  /* signal bars, positive state   */
+  --tat-green-soft:    #C8E89A;  /* progress fill, subtle green   */
+  --tat-yellow:        #FFE45C;  /* CTA pill / badge highlight    */
+
+  /* ---- Borders & lines ---- */
+  --tat-border:        var(--tat-ink);
+  --tat-border-w:      2px;       /* default hard border          */
+  --tat-border-w-bold: 3px;       /* feature cards / hero         */
+
+  /* ---- Radius (neo-brutalist = square) ---- */
+  --tat-radius:        0px;
+  --tat-radius-pill:   999px;     /* used only for badge pills    */
+
+  /* ---- Shadow (offset, no blur — the brutalist "hard" shadow) ---- */
+  --tat-shadow:        4px 4px 0 0 var(--tat-ink);
+  --tat-shadow-lg:     6px 6px 0 0 var(--tat-ink);
+
+  /* ---- Typography ---- */
+  --tat-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+              Roboto, "Helvetica Neue", Arial, sans-serif,
+              "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+
+  --tat-fs-display: clamp(2.75rem, 7vw, 6.5rem); /* big hero ~105px max */
+  --tat-fs-h1:      clamp(2rem, 4vw, 3.25rem);
+  --tat-fs-h2:      clamp(1.5rem, 3vw, 2.25rem);
+  --tat-fs-h3:      1.25rem;
+  --tat-fs-body:    1.18rem;     /* ~18.88px on the source site  */
+  --tat-fs-small:   0.85rem;
+
+  --tat-weight-black: 800;
+  --tat-weight-bold:  700;
+  --tat-weight-reg:   400;
+
+  /* ---- Spacing (4px base unit, like the source) ---- */
+  --tat-space-1: 4px;
+  --tat-space-2: 8px;
+  --tat-space-3: 12px;
+  --tat-space-4: 16px;
+  --tat-space-6: 24px;
+  --tat-space-8: 32px;
+  --tat-space-12: 48px;
+}
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+.tat {
+  background: var(--tat-bg);
+  color: var(--tat-ink);
+  font-family: var(--tat-font);
+  font-size: var(--tat-fs-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tat h1, .tat h2, .tat h3 {
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: var(--tat-weight-black);
+  margin: 0 0 var(--tat-space-4);
+}
+
+.tat-display {
+  font-size: var(--tat-fs-display);
+  font-weight: var(--tat-weight-black);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* Use on a word/span inside a heading to pull the red emphasis */
+.tat-accent { color: var(--tat-red); }
+.tat-on-dark { color: var(--tat-bg); }
+
+/* =====================================================================
+   Cards / panels
+   ===================================================================== */
+.tat-card {
+  background: var(--tat-surface);
+  border: var(--tat-border-w) solid var(--tat-border);
+  border-radius: var(--tat-radius);
+  padding: var(--tat-space-6);
+}
+
+.tat-card--feature {
+  background: var(--tat-surface-2);
+  border-width: var(--tat-border-w-bold);
+  box-shadow: var(--tat-shadow-lg);
+}
+
+.tat-card--raised { box-shadow: var(--tat-shadow); }
+
+/* =====================================================================
+   Buttons
+   ===================================================================== */
+.tat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tat-space-2);
+  font-family: inherit;
+  font-weight: var(--tat-weight-bold);
+  font-size: var(--tat-fs-small);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: var(--tat-space-3) var(--tat-space-6);
+  border: var(--tat-border-w) solid var(--tat-ink);
+  border-radius: var(--tat-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .05s ease, box-shadow .05s ease;
+}
+.tat-btn:active { transform: translate(2px, 2px); }
+
+.tat-btn--primary {            /* solid black, cream label */
+  background: var(--tat-ink);
+  color: var(--tat-bg);
+}
+.tat-btn--ghost {              /* outline on cream         */
+  background: transparent;
+  color: var(--tat-ink);
+}
+.tat-btn--yellow {             /* the "Daily email" pill   */
+  background: var(--tat-yellow);
+  color: var(--tat-ink);
+  border-radius: var(--tat-radius-pill);
+}
+
+/* =====================================================================
+   Badges & pills
+   ===================================================================== */
+.tat-badge {
+  display: inline-block;
+  font-size: var(--tat-fs-small);
+  font-weight: var(--tat-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--tat-space-1) var(--tat-space-3);
+  border: var(--tat-border-w) solid var(--tat-ink);
+}
+.tat-badge--red    { background: var(--tat-red);   color: #fff; }
+.tat-badge--green  { background: var(--tat-green); color: var(--tat-ink); }
+.tat-badge--label  { background: var(--tat-ink);   color: var(--tat-bg); }
+
+/* Big square score tile (the red "75 priority" block) */
+.tat-score {
+  display: inline-grid;
+  place-items: center;
+  background: var(--tat-red);
+  color: #fff;
+  border: var(--tat-border-w-bold) solid var(--tat-ink);
+  padding: var(--tat-space-3) var(--tat-space-4);
+  font-weight: var(--tat-weight-black);
+  line-height: 1;
+}
+.tat-score b { font-size: 2.25rem; display: block; }
+.tat-score span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .08em; }
+
+/* =====================================================================
+   Signal / progress bars (the green "strong signal" rows)
+   ===================================================================== */
+.tat-signal {
+  display: flex;
+  align-items: center;
+  gap: var(--tat-space-3);
+  border: var(--tat-border-w) solid var(--tat-ink);
+  background: var(--tat-green-soft);
+  padding: var(--tat-space-2) var(--tat-space-3);
+}
+.tat-signal__dot {
+  width: 10px; height: 10px;
+  background: var(--tat-green);
+  border: 1px solid var(--tat-ink);
+  border-radius: 50%;
+  flex: none;
+}
+.tat-signal__label { flex: 1; }
+.tat-signal__strength {
+  font-size: var(--tat-fs-small);
+  font-weight: var(--tat-weight-bold);
+  text-transform: uppercase;
+}
+
+.tat-progress {
+  height: 14px;
+  border: var(--tat-border-w) solid var(--tat-ink);
+  background: var(--tat-surface);
+}
+.tat-progress > i {
+  display: block;
+  height: 100%;
+  background: var(--tat-green);
+}
+
+/* =====================================================================
+   List rows (the ranked shortlist items)
+   ===================================================================== */
+.tat-row {
+  display: flex;
+  align-items: center;
+  gap: var(--tat-space-4);
+  border-top: var(--tat-border-w) solid var(--tat-ink);
+  padding: var(--tat-space-4) var(--tat-space-2);
+  font-weight: var(--tat-weight-bold);
+}
+.tat-row__rank { color: var(--tat-muted); font-variant-numeric: tabular-nums; }
+.tat-row__title { flex: 1; }
+.tat-row__meta { color: var(--tat-muted); font-size: var(--tat-fs-small); }
+
+/* =====================================================================
+   Header / nav
+   ===================================================================== */
+.tat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tat-space-6);
+  padding: var(--tat-space-4) var(--tat-space-6);
+  border-bottom: var(--tat-border-w) solid var(--tat-ink);
+}
+.tat-brand { display: flex; align-items: center; gap: var(--tat-space-2); font-weight: var(--tat-weight-black); }
+.tat-brand__mark {
+  width: 22px; height: 22px;
+  background: var(--tat-red);
+  border: var(--tat-border-w) solid var(--tat-ink);
+}
+.tat-nav { display: flex; gap: var(--tat-space-6); }
+.tat-nav a { color: var(--tat-ink); text-decoration: none; font-size: var(--tat-fs-small); font-weight: var(--tat-weight-bold); }
+.tat-nav a:hover { color: var(--tat-red); }
