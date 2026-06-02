@@ -36,13 +36,18 @@ hand-drawn callouts.
 - **Status indicator:** blinking green dot — *"System Status: Nominal"* (`.cgd-status`).
 - Helper components for metric widgets, error alerts, feature-request lists, sticky notes, and badges.
 
-## Robot hero asset
-The brief calls for a glossy white-and-red 3D robot with emissive neon-blue eyes
-in the right hero column. That's a rendered image asset, not CSS — the demo
-leaves a **labelled drop slot** (`.robot-slot`) where you place the render
-(`robot.png`). Everything around it is built to frame a 3D character floating
-over the flat 2D dashboard. If you upload/generate the robot image, drop it in
-this folder and swap the slot for an `<img>`.
+## Robot / hero image asset
+The brief calls for a glossy white-and-red 3D robot hero in the right column.
+That's a rendered image, not CSS, so the demo is **pre-wired to auto-load it**:
+
+1. Save the reference image (or an isolated robot render) into this folder as
+   **`hero.png`**.
+2. Re-open `demo.html` — it appears automatically with a drop-shadow + neon glow.
+
+Until `hero.png` exists, the slot shows a dashed placeholder (the `<img>` hides
+itself via `onerror`, revealing the hint). No HTML edits needed — just drop the
+file in. A transparent-background PNG of just the robot looks best, but the full
+scene works too.
 
 ## Use
 ```html
