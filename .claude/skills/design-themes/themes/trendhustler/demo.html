@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TrendHustler style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: var(--th-space-8) var(--th-space-4); }
+    .hero { margin: var(--th-space-8) 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: var(--th-space-2); margin-top: var(--th-space-4); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--th-space-4); }
+    @media (max-width: 720px){ .stats { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="th">
+
+  <!-- Ticker -->
+  <div class="th-ticker">
+    <span class="th-ticker__item">BLENDRMAXXING <b class="th-up">$1,404 ▲</b></span>
+    <span class="th-ticker__item">VIBECODING <b class="th-down">$2,484 ▼</b></span>
+    <span class="th-ticker__item">PROMPT GOLD <b class="th-up">$3,012 ▲</b></span>
+    <span class="th-ticker__item">AGENT SWARM <b class="th-up">$1,944 ▲</b></span>
+    <span class="th-ticker__item">DRIP MODELS <b class="th-down">$987 ▼</b></span>
+  </div>
+
+  <header class="th-header">
+    <a class="th-btn th-btn--primary" href="#">▶ Play TrendHustler</a>
+    <a class="th-btn th-btn--ghost" href="#">🔄 Cop Fresh Data · 11h ago</a>
+    <span class="th-header__spacer"></span>
+    <nav class="th-nav"><a href="#">The Street</a><a href="#">Gems</a><a href="#">Fades</a></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="th-eyebrow">● live from the street · 11h ago</div>
+      <h1 class="th-display"><span class="th-green">TREND</span>HUSTLER</h1>
+      <p class="th-mono th-pink" style="letter-spacing:.1em;">// before a trend, it's my product</p>
+      <div class="chips">
+        <span class="th-tag">● Market Open</span>
+        <span class="th-tag th-gold">Plug-In Payroll</span>
+        <span class="th-tag th-pink">Fade Risk</span>
+        <span class="th-tag">Make It Fast</span>
+      </div>
+    </section>
+
+    <div class="th-section-head">
+      <h2>The Street</h2>
+      <span class="th-section-head__note">// market mode</span>
+    </div>
+
+    <section class="stats">
+      <div class="th-card th-card--green">
+        <div class="th-stat__label">Heat Index</div>
+        <div class="th-stat__num th-green">47</div>
+        <div class="th-stat__sub">Neutral · holding</div>
+      </div>
+      <div class="th-card th-card--gold">
+        <div class="th-stat__label">Live Signals</div>
+        <div class="th-stat__num th-gold">47</div>
+        <div class="th-stat__sub">Gems worth a look</div>
+      </div>
+      <div class="th-card">
+        <div class="th-stat__label">Cop Now</div>
+        <div class="th-stat__num th-pink">3</div>
+        <div class="th-stat__sub">Closing the window</div>
+      </div>
+    </section>
+
+    <div style="margin-top: var(--th-space-8);">
+      <a class="th-btn th-btn--gold" href="#">★ Premium Drop · SoFusionLLM</a>
+    </div>
+  </main>
+</body>
+</html>

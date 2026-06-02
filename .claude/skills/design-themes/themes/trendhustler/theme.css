@@ -1,0 +1,233 @@
+/* =====================================================================
+   TrendHustler — Design System
+   Extracted from https://hustlerv369.github.io/trendhustler/ via Firecrawl
+   (confidence 0.93)
+   Style: GTA "black market" — near-black canvas with green candlestick-chart
+   texture, huge Pricedown/Impact display wordmark, toxic-green + magenta +
+   gold accents, monospace data readouts, a stock-ticker bar, sharp 0-radius
+   corners, no shadows. Loud, illicit, high-energy.
+   ===================================================================== */
+
+:root {
+  /* ---- Core palette ---- */
+  --th-bg:        #07080A;  /* near-black canvas                 */
+  --th-bg-2:      #0E1012;  /* card / panel                      */
+  --th-bg-3:      #15181B;  /* raised panel / ticker             */
+  --th-line:      #1C2A22;  /* subtle dividers                   */
+
+  --th-text:      #EAF2EC;  /* off-white text                    */
+  --th-text-dim:  #8A968E;  /* muted / metadata                  */
+
+  /* ---- Accents ---- */
+  --th-green:     #00E676;  /* primary "money" accent            */
+  --th-green-dk:  #053922;  /* green-tinted borders/fills        */
+  --th-pink:      #FF2E97;  /* hot magenta secondary accent      */
+  --th-gold:      #D4AF37;  /* links, "premium" highlights       */
+  --th-red:       #FF3B5C;  /* down / negative (ticker, stats)   */
+
+  --th-link:      var(--th-gold);
+
+  /* ---- Borders / shape (sharp, no radius) ---- */
+  --th-border:    #223129;
+  --th-border-w:  1px;
+  --th-radius:    0px;
+
+  /* ---- Typography ---- */
+  /* Pricedown = the GTA logo font (not on Google Fonts); Anton is the
+     closest free condensed fallback. */
+  --th-font-display: "Pricedown", Anton, Impact, "Haettenschweiler",
+                     "Arial Narrow Bold", sans-serif;
+  --th-font-body:    "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --th-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --th-fs-display: clamp(3.5rem, 13vw, 10rem);  /* wordmark ~164px       */
+  --th-fs-h2:      clamp(1.75rem, 4vw, 3.25rem);
+  --th-fs-h3:      1.1rem;
+  --th-fs-body:    1rem;        /* 16px                              */
+  --th-fs-mono:    0.8rem;
+  --th-fs-eyebrow: 0.7rem;
+
+  /* ---- Spacing (4px base unit) ---- */
+  --th-space-1: 4px;
+  --th-space-2: 8px;
+  --th-space-3: 12px;
+  --th-space-4: 16px;
+  --th-space-6: 24px;
+  --th-space-8: 32px;
+
+  /* ---- The signature faint green chart-grid backdrop ---- */
+  --th-grid:
+    linear-gradient(rgba(0,230,118,.04) 1px, transparent 1px) 0 0 / 100% 28px,
+    linear-gradient(90deg, rgba(0,230,118,.04) 1px, transparent 1px) 0 0 / 40px 100%;
+}
+
+/* To load fonts (Pricedown self-hosted; Anton + JetBrains from Google):
+   <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+   Drop a Pricedown @font-face if you have the file; otherwise Anton stands in. */
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+.th {
+  background-color: var(--th-bg);
+  background-image: var(--th-grid);
+  color: var(--th-text);
+  font-family: var(--th-font-body);
+  font-size: var(--th-fs-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.th h1, .th h2, .th h3 {
+  font-family: var(--th-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+  margin: 0 0 var(--th-space-3);
+}
+
+/* Big GTA wordmark — combine two spans for the two-tone logo */
+.th-display { font-size: var(--th-fs-display); line-height: 0.85; }
+.th-green { color: var(--th-green); }
+.th-pink  { color: var(--th-pink); }
+.th-gold  { color: var(--th-gold); }
+
+/* Mono eyebrow, e.g. "● LIVE FROM THE STREET · 11H AGO" */
+.th-eyebrow {
+  font-family: var(--th-font-mono);
+  font-size: var(--th-fs-eyebrow);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--th-green);
+}
+.th-mono { font-family: var(--th-font-mono); font-size: var(--th-fs-mono); }
+
+/* =====================================================================
+   Ticker bar (top scrolling price strip)
+   ===================================================================== */
+.th-ticker {
+  display: flex;
+  gap: var(--th-space-6);
+  align-items: center;
+  padding: var(--th-space-2) var(--th-space-4);
+  background: var(--th-bg-3);
+  border-bottom: var(--th-border-w) solid var(--th-border);
+  font-family: var(--th-font-mono);
+  font-size: var(--th-fs-mono);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.th-ticker__item { color: var(--th-text-dim); }
+.th-ticker__item b { color: var(--th-text); font-weight: 700; }
+.th-up   { color: var(--th-green); }
+.th-down { color: var(--th-red); }
+
+/* =====================================================================
+   Buttons (sharp, no radius)
+   ===================================================================== */
+.th-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--th-space-2);
+  font-family: var(--th-font-mono);
+  font-weight: 700;
+  font-size: var(--th-fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: var(--th-space-3) var(--th-space-4);
+  border: var(--th-border-w) solid var(--th-green);
+  border-radius: var(--th-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .12s ease, color .12s ease;
+}
+.th-btn--primary {                 /* solid toxic green */
+  background: var(--th-green);
+  color: #04130A;
+}
+.th-btn--primary:hover { background: var(--th-green); filter: brightness(1.12); }
+
+.th-btn--ghost {                   /* dark with green text */
+  background: var(--th-bg-2);
+  color: var(--th-green);
+  border-color: var(--th-green-dk);
+}
+.th-btn--ghost:hover { border-color: var(--th-green); }
+
+.th-btn--gold { background: transparent; color: var(--th-gold); border-color: var(--th-gold); }
+
+/* =====================================================================
+   Tags / pills (filter chips like "Market Open", "Fade")
+   ===================================================================== */
+.th-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--th-font-mono);
+  font-size: var(--th-fs-eyebrow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px var(--th-space-3);
+  border: var(--th-border-w) solid var(--th-green-dk);
+  color: var(--th-green);
+  background: rgba(0,230,118,.06);
+}
+.th-tag--pink { color: var(--th-pink); border-color: rgba(255,46,151,.4); background: rgba(255,46,151,.06); }
+.th-tag--gold { color: var(--th-gold); border-color: rgba(212,175,55,.4); background: rgba(212,175,55,.06); }
+
+/* =====================================================================
+   Cards / panels
+   ===================================================================== */
+.th-card {
+  background: var(--th-bg-2);
+  border: var(--th-border-w) solid var(--th-border);
+  border-radius: var(--th-radius);
+  padding: var(--th-space-6);
+}
+.th-card--gold   { border-color: var(--th-gold); }   /* "premium" drop */
+.th-card--green  { border-color: var(--th-green); }
+
+/* Stat block (the "47 / NEUTRAL" readouts) */
+.th-stat__label {
+  font-family: var(--th-font-mono);
+  font-size: var(--th-fs-eyebrow);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--th-text-dim);
+}
+.th-stat__num {
+  font-family: var(--th-font-display);
+  font-size: 3.25rem;
+  line-height: 1;
+  margin: var(--th-space-1) 0;
+}
+.th-stat__sub { font-family: var(--th-font-mono); font-size: var(--th-fs-mono); color: var(--th-text-dim); text-transform: uppercase; }
+
+/* =====================================================================
+   Section header ("THE STREET // MARKET MODE")
+   ===================================================================== */
+.th-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--th-space-3);
+  border-bottom: var(--th-border-w) solid var(--th-border);
+  padding-bottom: var(--th-space-3);
+  margin-bottom: var(--th-space-6);
+}
+.th-section-head h2 { margin: 0; }
+.th-section-head__note { font-family: var(--th-font-mono); font-size: var(--th-fs-eyebrow); letter-spacing: .16em; text-transform: uppercase; color: var(--th-green); }
+
+/* =====================================================================
+   Header / nav
+   ===================================================================== */
+.th-header {
+  display: flex;
+  align-items: center;
+  gap: var(--th-space-4);
+  padding: var(--th-space-3) var(--th-space-4);
+  border-bottom: var(--th-border-w) solid var(--th-border);
+}
+.th-header__spacer { flex: 1; }
+.th-nav { display: flex; gap: var(--th-space-4); }
+.th-nav a { color: var(--th-text-dim); text-decoration: none; font-family: var(--th-font-mono); font-size: var(--th-fs-eyebrow); letter-spacing: .12em; text-transform: uppercase; }
+.th-nav a:hover { color: var(--th-gold); }

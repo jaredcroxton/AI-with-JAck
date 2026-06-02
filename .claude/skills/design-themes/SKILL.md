@@ -16,6 +16,7 @@ plus a demo dashboard and a reference README.
 |-------|--------|------|------------------|
 | **Trending AI Topics** | `themes/trending-ai-topics/` | Neo-brutalist · warm cream canvas, hard black borders, square corners, red + lime accents | `tat-` / `.tat` |
 | **Glitch Cat Club** | `themes/glitch-cat-club/` | Dark glitch zine · black canvas, cream text, hot-pink accent, Impact headings, mono body, glitch-cut corners | `gcc-` / `.gcc` |
+| **TrendHustler** | `themes/trendhustler/` | GTA black-market · near-black chart-grid canvas, Pricedown wordmark, toxic-green + magenta + gold, ticker bar, mono data, sharp corners | `th-` / `.th` |
 
 Each theme folder contains:
 - `theme.css` — design tokens (`--<prefix>-*`) + component classes
