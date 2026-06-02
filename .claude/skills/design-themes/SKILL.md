@@ -10,6 +10,8 @@ A catalog of design systems extracted from real websites using the Firecrawl
 self-contained, framework-agnostic CSS file (CSS variables + helper classes)
 plus a demo dashboard and a reference README.
 
+> **Installing this skill for use across all your projects:** see `INSTALL.md`.
+
 ## Theme catalog
 
 | Theme | Folder | Vibe | Prefix / wrapper |
