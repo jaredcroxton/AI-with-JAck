@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Glitch Cat Club style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Inter:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: var(--gcc-space-8) var(--gcc-space-4); }
+    .hero { margin: var(--gcc-space-8) 0; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gcc-space-4); }
+    @media (max-width: 900px){ .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px){ .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="gcc">
+
+  <header class="gcc-header">
+    <a class="gcc-btn gcc-btn--primary" href="#">▶ Join the Club</a>
+    <a class="gcc-btn gcc-btn--ghost" href="#">Watch the Streams</a>
+    <span class="gcc-header__spacer"></span>
+    <nav class="gcc-nav"><a href="#">Streams</a><a href="#">Curriculum</a><a href="#">About</a></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="gcc-eyebrow">// what this is</div>
+      <h1 class="gcc-display">A small room.<br><span class="gcc-accent">High signal.</span></h1>
+      <p class="gcc-mono" style="max-width: 46ch; color: var(--gcc-cream-dim);">
+        A community for builders. AI is our day job. All skill levels welcome.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="gcc-card">
+        <div class="gcc-card__num">01</div>
+        <span class="gcc-badge">live</span>
+        <div class="gcc-card__title">See how it actually gets done</div>
+        <p class="gcc-card__body">Live streams. Builds, experiments, breaks, commit fixes. Drop in, ask anything, drive what's next.</p>
+      </article>
+
+      <article class="gcc-card">
+        <div class="gcc-card__num">02</div>
+        <span class="gcc-badge">tools</span>
+        <div class="gcc-card__title">Take the tools. Use them today.</div>
+        <p class="gcc-card__body">Starter kits, plug-and-play scripts, and adapt-to-your-own templates.</p>
+      </article>
+
+      <article class="gcc-card">
+        <div class="gcc-card__num">03</div>
+        <span class="gcc-badge">learn</span>
+        <div class="gcc-card__title">A real curriculum, properly taught</div>
+        <p class="gcc-card__body">From welcome to autonomous systems. Structured lessons, one step every space. Real practitioner guidance.</p>
+      </article>
+
+      <article class="gcc-card gcc-card--cream">
+        <div class="gcc-card__num">04</div>
+        <span class="gcc-badge gcc-badge--pink">help</span>
+        <div class="gcc-card__title">Bring your problem. Get a real answer.</div>
+        <p class="gcc-card__body">Weekly live calls, direct help, emergency fixes, real answers.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

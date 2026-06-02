@@ -70,6 +70,6 @@ heavy black sans-serif headings, and punchy red + lime-green accents.
 </body>
 ```
 
-Open **`dashboard-demo.html`** in a browser to see all the pieces assembled into
+Open **`demo.html`** in a browser to see all the pieces assembled into
 a sample dashboard. Everything is plain CSS variables, so you can also map the
 `--tat-*` tokens onto Tailwind, styled-components, or any framework.
